@@ -19,9 +19,7 @@ export async function fetchParts() {
 export async function addPart(part, file) {
     let imageUrl = null;
 
-    if (file) {
-        imageUrl = await uploadImage(file);
-    }
+    if (file) imageUrl = await uploadImage(file);
 
     const response = await axios.post("/parts", { ...part, image: imageUrl });
     return response.data;
@@ -33,11 +31,13 @@ export async function updatePart(id, part) {
     return response.data;
 }
 
+// DELETE part
 export async function deletePart(id) {
     const response = await axios.delete(`${API_URL}/parts/${id}`);
     return response.data;
 }
 
+// POST new image
 export async function uploadImage(file) {
     const formData = new FormData();
     formData.append("file", file);

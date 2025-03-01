@@ -48,3 +48,12 @@ def update_part(part_id: int, part_update: PartUpdate, db: Session = Depends(get
     return part
 
 # DELETE a part
+@router.delete('/parts/{part_id}')
+def delete_part(part_id: int, db: Session = Depends(get_db))
+    part = db.query(Part).filter(Part.id == part.id).first()
+    if not part:
+        raise HTTPException(status_code=404, detail="Part not found, bro")
+
+    db.delete(part)
+    db.commit()
+    return {"message": "Part deleted successfully"}

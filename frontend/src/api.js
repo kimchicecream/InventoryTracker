@@ -3,6 +3,8 @@ import axios from "axios";
 const API_URL = "http://127.0.0.1:8000";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
+axios.defaults.withCredentials = true;
+
 // Default headers for all request
 axios.defaults.baseURL = API_URL;
 axios.defaults.headers.common["x-api-key"] = API_KEY;

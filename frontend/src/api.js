@@ -16,9 +16,20 @@ export async function fetchParts() {
 }
 
 // POST new part
-export async function addPart(part) {
-    const response = await axios.post(`${API_URL}/parts`, part);
-    return response.data;
+export async function addPart(part, file) {
+    let imageUrl = null;
+
+    if (file) {
+        imageUrl = await uploadImage(file);
+    }
+
+    const response = await fetch("http://127.0.0.1:8000/parts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...part, image: imageUrl }),
+    });
+
+    return response.json();
 }
 
 // UPDATE part

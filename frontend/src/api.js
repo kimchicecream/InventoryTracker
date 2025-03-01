@@ -31,3 +31,16 @@ export async function deletePart(id) {
     const response = await axios.delete(`${API_URL}/parts/${id}`);
     return response.data;
 }
+
+export async function uploadImage(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("http://127.0.0.1:8000/upload-image", {
+        method: "POST",
+        body: formData,
+    });
+
+    const data = await response.json();
+    return data.image_url;
+}

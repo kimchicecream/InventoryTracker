@@ -15,6 +15,7 @@ class Part(Base):
     # price = Column(Float, nullable=False)
     link = Column(String, nullable=True)
     image = Column(String, nullable=True)
+    category = Column(String, nullable=True)
 
 # USERS TABLE
 class User(Base):

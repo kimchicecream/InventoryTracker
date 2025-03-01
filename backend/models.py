@@ -1,8 +1,11 @@
-from sqlalchemy import Column, Integer, String, Float, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
+from datetime import datetime
 
 Base = declarative_base()
 
+# PARTS TABLE
 class Part(Base):
     __tablename__ = "parts"
 
@@ -12,3 +15,14 @@ class Part(Base):
     # price = Column(Float, nullable=False)
     link = Column(String, nullable=True)
     image = Column(String, nullable=True)
+
+# USERS TABLE
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, nullable=False)
+    password = Column(String, nullable=False)
+    profile_image = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

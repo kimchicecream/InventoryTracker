@@ -23,13 +23,8 @@ export async function addPart(part, file) {
         imageUrl = await uploadImage(file);
     }
 
-    const response = await fetch("http://127.0.0.1:8000/parts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...part, image: imageUrl }),
-    });
-
-    return response.json();
+    const response = await axios.post("/parts", { ...part, image: imageUrl });
+    return response.data;
 }
 
 // UPDATE part
@@ -47,11 +42,11 @@ export async function uploadImage(file) {
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await fetch("http://127.0.0.1:8000/upload-image", {
-        method: "POST",
-        body: formData,
+    const response = await axios.post("/upload-image", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
     });
 
-    const data = await response.json();
-    return data.image_url;
+    return response.data.image_url;
 }

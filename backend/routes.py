@@ -40,7 +40,7 @@ def update_part(part_id: int, part_update: PartUpdate, db: Session = Depends(get
     if not part:
         raise HTTPException(status_code=404, detail="Part not found, bro")
 
-    for key, value in part_update.dict(exlcude_unset=True).items():
+    for key, value in part_update.dict(exclude_unset=True).items():
         setattr(part, key, value)
 
     db.commit()
@@ -49,8 +49,8 @@ def update_part(part_id: int, part_update: PartUpdate, db: Session = Depends(get
 
 # DELETE a part
 @router.delete('/parts/{part_id}')
-def delete_part(part_id: int, db: Session = Depends(get_db))
-    part = db.query(Part).filter(Part.id == part.id).first()
+def delete_part(part_id: int, db: Session = Depends(get_db)):
+    part = db.query(Part).filter(Part.id == part_id).first()
     if not part:
         raise HTTPException(status_code=404, detail="Part not found, bro")
 

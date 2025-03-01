@@ -9,5 +9,5 @@ class Part(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     quantity = Column(Integer, default = 0)
-    price = Column(Float, nullable=False)
-    link = Column(String)
+    # price = Column(Float, nullable=False)
+    link = Column(String, nullable=True)

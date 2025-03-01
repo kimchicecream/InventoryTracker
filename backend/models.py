@@ -11,3 +11,4 @@ class Part(Base):
     quantity = Column(Integer, default = 0)
     # price = Column(Float, nullable=False)
     link = Column(String, nullable=True)
+    image = Column(String, nullable=True)

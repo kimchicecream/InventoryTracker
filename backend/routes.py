@@ -25,11 +25,13 @@ class PartCreate(BaseModel):
     quantity: int
     # price: float
     link: Optional[str] = None
+    image: Optional[str] = None
 
 class PartUpdate(BaseModel):
     name: Optional[str] = None
     quantity: Optional[int] = None
     link: Optional[str] = None
+    image: Optional[str] = None
 
 # GET all parts
 @router.get("/parts")

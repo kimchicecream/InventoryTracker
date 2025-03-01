@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Header
+from fastapi import APIRouter, Depends, HTTPException, Header, File, UploadFile
 from sqlalchemy.orm import Session
 from database import get_db
 from models import Part
@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from typing import Optional
 import os
 from dotenv import load_dotenv
+from s3_utils import upload_to_s3
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
@@ -38,10 +39,16 @@ class PartUpdate(BaseModel):
 def get_parts(db: Session = Depends(get_db)):
     return db.query(Part).all()
 
+# POST a new image to S3 bucket
+@router.post("/upload-image")
+def upload_image(file: UploadFile = File(...)):
+    image_url = upload_to_s3(file)
+    return {"image_url": image_url}
+
 # POST a new part
 @router.post("/parts")
 def add_part(part: PartCreate, db: Session = Depends(get_db)):
-    new_part = Part(**part.model_dump())  # ✅ Pydantic v2 fix
+    new_part = Part(**part.model_dump())
     db.add(new_part)
     db.commit()
     db.refresh(new_part)

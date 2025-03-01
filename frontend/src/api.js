@@ -1,6 +1,11 @@
 import axios from "axios";
 
 const API_URL = "http://127.0.0.1:8000";
+const API_KEY = import.meta.env.VITE_API_KEY;
+
+// Default headers for all request
+axios.defaults.baseURL = API_URL;
+axios.defaults.headers.common["x-api-key"] = API_KEY;
 
 // GET all parts
 export async function fetchParts() {
@@ -21,6 +26,6 @@ export async function updatePart(id, part) {
 }
 
 export async function deletePart(id) {
-    const response = await axios.delete(`${API_URL}/parts/${id}`, part);
+    const response = await axios.delete(`${API_URL}/parts/${id}`);
     return response.data;
 }

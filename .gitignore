@@ -9,6 +9,8 @@ __pycache__/
 *.sqlite3
 
 .env
+backend/.env
+frontend/.env
 
 .vscode/
 .idea/

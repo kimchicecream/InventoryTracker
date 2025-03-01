@@ -3,7 +3,9 @@ import './Navigation.css';
 function Navigation() {
     return (
         <div className="navigation">
-            <div className='logo'></div>
+            <button className='dashboard'></button>
+            <button className='inventory'></button>
+            <button className='settings'></button>
         </div>
     );
 }

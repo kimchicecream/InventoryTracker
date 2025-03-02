@@ -47,7 +47,7 @@
     align-items: center;
 
     color: white;
-    transition: background-color 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    transition: background-color 0.3s ease-in-out, opacity 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
     opacity: 1;
 }
 
@@ -55,7 +55,7 @@
 .navigation button:hover {
     background-color: var(--owrynge);
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.332);
 }
 
 .navigation.minimized button {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import "./Navigation.css";
 
 function Navigation() {
@@ -8,7 +8,7 @@ function Navigation() {
     const startMinimizeTimer = () => {
         timeoutRef.current = setTimeout(() => {
             setIsExpanded(false);
-        }, 3000);
+        }, 3000); // 3 seconds before collpasing
     };
 
     const cancelMinimize = () => {
@@ -20,7 +20,7 @@ function Navigation() {
 
     return (
         <div
-            className={`navigation ${isExpanded ? "" : "minimized"}`}
+            className={`navigation ${isExpanded ? "expanded" : "minimized"}`}
             onMouseEnter={cancelMinimize}
             onMouseLeave={startMinimizeTimer}
         >

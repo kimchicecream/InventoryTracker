@@ -1,4 +1,3 @@
-/* Navigation Container */
 .navigation {
     display: inline-flex;
     justify-content: center;
@@ -15,20 +14,26 @@
     backdrop-filter: blur(10px);
     border-radius: 10px;
 
-    height: 70px; /* Full height */
+    height: 70px;
     width: fit-content;
 
-    transition: height 0.3s ease-in-out;
+    transition: height 0.2s ease-in-out;
 
     overflow: hidden;
 }
 
-/* Minimized state */
 .navigation.minimized {
-    height: 5px;
+    height: 10px;
+    padding: 0;
+    transition: height 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
-/* Buttons */
+.navigation.expanded {
+    height: 70px;
+    padding: 10px;
+    transition: height 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
 .navigation button {
     all: unset;
 
@@ -42,16 +47,22 @@
     align-items: center;
 
     color: white;
-    transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    transition: opacity 0.2s ease-in-out, background-color 0.3s ease-in-out;
     opacity: 1;
 }
 
+/* button hover effects */
 .navigation button:hover {
     background-color: var(--owrynge);
     cursor: pointer;
 }
 
-/* Buttons fade out when minimized */
 .navigation.minimized button {
     opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.navigation.expanded button {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }

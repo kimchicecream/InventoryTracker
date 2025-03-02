@@ -16,6 +16,7 @@ html {
 
 :root {
     --owrynge: rgb(255, 115, 0);
+    --light-owrynge: rgb(255, 186, 129);
     --dark-mode-bg: black;
     --light-mode-bg: white;
 }

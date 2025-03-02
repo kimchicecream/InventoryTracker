@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import "./Navigation.css";
 
-function Navigation() {
+function Navigation({ setActivePage }) {
     const [isExpanded, setIsExpanded] = useState(true);
+    const [activeButton, setActiveButton] = useState("dashboard");
     const timeoutRef = useRef(null);
 
     const startMinimizeTimer = () => {
@@ -18,19 +19,33 @@ function Navigation() {
         setIsExpanded(true);
     };
 
+    const handleNavigation = (page) => {
+        setActivePage(page);
+        setActiveButton(page);
+    };
+
     return (
         <div
             className={`navigation ${isExpanded ? "expanded" : "minimized"}`}
             onMouseEnter={cancelMinimize}
             onMouseLeave={startMinimizeTimer}
         >
-            <button className="dashboard">
+            <button
+                className={`dashboard ${activeButton === "dashboard" ? "selected" : ""}`}
+                onClick={() => handleNavigation("dashboard")}
+            >
                 <i className="fa-solid fa-gauge"></i>
             </button>
-            <button className="inventory">
+            <button
+                className={`inventory ${activeButton === "inventory" ? "selected" : ""}`}
+                onClick={() => handleNavigation("inventory")}
+            >
                 <i className="fa-solid fa-warehouse"></i>
             </button>
-            <button className="settings">
+            <button
+                className={`settings ${activeButton === "settings" ? "selected" : ""}`}
+                onClick={() => handleNavigation("settings")}
+            >
                 <i className="fa-solid fa-gear"></i>
             </button>
         </div>

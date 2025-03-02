@@ -3,12 +3,12 @@ import Inventory from '../Inventory/Inventory';
 import Settings from '../Settings/Settings';
 import './Homepage.css';
 
-function Homepage() {
+function Homepage({ activePage }) {
     return (
         <div className='homepage'>
-            <Dashboard />
-            <Inventory />
-            <Settings />
+            {activePage === "dashboard" && <Dashboard />}
+            {activePage === "inventory" && <Inventory />}
+            {activePage === "settings" && <Settings />}
         </div>
     );
 }

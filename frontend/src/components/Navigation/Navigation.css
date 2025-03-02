@@ -17,7 +17,7 @@
     height: 70px;
     width: fit-content;
 
-    transition: height 0.2s ease-in-out;
+    transition: height 0.3s ease-in-out, padding 0.3s ease-in-out;
 
     overflow: hidden;
 }
@@ -47,7 +47,7 @@
     align-items: center;
 
     color: white;
-    transition: opacity 0.2s ease-in-out, background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out, opacity 0.2s ease-in-out;
     opacity: 1;
 }
 
@@ -55,14 +55,15 @@
 .navigation button:hover {
     background-color: var(--owrynge);
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .navigation.minimized button {
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    /* pointer-events: none; */
 }
 
 .navigation.expanded button {
     opacity: 1;
-    transition: opacity 0.3s ease-in-out;
+    /* transition: opacity 0.3s ease-in-out; */
 }

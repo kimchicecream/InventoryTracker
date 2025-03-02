@@ -1,6 +1,5 @@
+/* Navigation Container */
 .navigation {
-    /* border: 2px solid red; */
-
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -12,21 +11,47 @@
     transform: translateX(-50%);
 
     padding: 10px;
-
-    background-color: rgb(187, 187, 187);
+    background-color: rgba(0, 0, 0, 0.192);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
+
+    height: 70px; /* Full height */
+    width: fit-content;
+
+    transition: height 0.3s ease-in-out;
+
+    overflow: hidden;
 }
 
+/* Minimized state */
+.navigation.minimized {
+    height: 5px;
+}
+
+/* Buttons */
 .navigation button {
     all: unset;
 
-    background-color: gray;
+    background-color: rgba(128, 128, 128, 0.485);
     height: 50px;
     width: 50px;
 
     border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    opacity: 1;
 }
 
 .navigation button:hover {
+    background-color: var(--owrynge);
     cursor: pointer;
+}
+
+/* Buttons fade out when minimized */
+.navigation.minimized button {
+    opacity: 0;
 }

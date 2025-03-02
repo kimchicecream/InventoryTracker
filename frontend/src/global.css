@@ -13,3 +13,9 @@ body {
 html {
     scroll-behavior: smooth;
 }
+
+:root {
+    --owrynge: rgb(255, 115, 0);
+    --dark-mode-bg: black;
+    --light-mode-bg: white;
+}

@@ -1,6 +1,6 @@
-import Navigation from '../Navigation/Navigation';
 import Dashboard from '../Dashboard/Dashboard';
 import Inventory from '../Inventory/Inventory';
+import Settings from '../Settings/Settings';
 import './Homepage.css';
 
 function Homepage() {
@@ -8,6 +8,7 @@ function Homepage() {
         <div className='homepage'>
             <Dashboard />
             <Inventory />
+            <Settings />
         </div>
     );
 }

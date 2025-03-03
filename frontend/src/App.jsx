@@ -11,7 +11,7 @@ function App() {
       <Homepage activePage={activePage}/>
       <Navigation setActivePage={setActivePage}/>
     </>
-  );
+  )
 }
 
 export default App;

@@ -53,11 +53,16 @@
     opacity: 1;
 }
 
+.navigation button i {
+    transition: 0.3s ease-in-out;
+}
+
 /* button hover effects */
 .navigation button:hover {
-    background-color: var(--light-owrynge);
+    background-color: var(--even-lighter-owrynge);
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.332);
+    color: var(--owrynge);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.332); */
 }
 
 .navigation.minimized button {
@@ -72,4 +77,5 @@
 
 .navigation button.selected {
     background-color: var(--owrynge);
+    color: var(--even-lighter-owrynge);
 }

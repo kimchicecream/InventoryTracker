@@ -7,12 +7,16 @@ function Inventory() {
             <div className='data-cards-container'></div>
             <div className="search-add-container">
                 <div className="search-bar">
-                    <div className="search-icon"></div>
-                    <div className="text-field"></div>
+                    <div className="search-icon"><i className="fa-solid fa-magnifying-glass"></i></div>
+                    <input
+                        type="text"
+                        placeholder="Search inventory"
+                        className="search-input"
+                    />
                 </div>
-                <div className="add-part-button">
-                    <i className="fa-solid fa-plus"></i> Add part
-                </div>
+                <button className="add-item-button">
+                    <i className="fa-solid fa-plus"></i> Add Item
+                </button>
             </div>
             <div className="big-box">
                 <div className="filters-container"></div>

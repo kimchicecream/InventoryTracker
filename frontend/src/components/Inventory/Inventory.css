@@ -1,7 +1,85 @@
+
+
 .inventory {
     padding: 20px 80px;
+    display: flex;
+    flex-direction: column;
 }
 
 .inventory .header-container h1 {
     margin: 0;
+    margin-bottom: 20px;
 }
+
+.inventory .data-cards-container {
+    /* border: 1px solid red; */
+}
+
+.inventory .search-add-container {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
+
+.inventory .search-add-container .search-bar {
+    /* border: 2px solid red; */
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+
+    background-color: #f5f5f5;
+    border-radius: var(--button-radius);
+    padding: 8px 12px;
+    width: 250px;
+    border: 1px solid #ccc;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.search-bar:hover {
+    border-color: var(--owrynge);
+}
+
+.search-icon {
+    color: #aaa;
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.search-input {
+    all: unset;
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}
+
+/* --------------- */
+/* ADD ITEM BUTTON */
+/* --------------- */
+.inventory button {
+    all: unset;
+    padding: 8px 15px;
+    background-color: var(--owrynge);
+    border-radius: var(--button-radius);
+    color: white;
+    font-size: 14px;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.inventory button:hover {
+    cursor: pointer;
+    background-color: var(--even-lighter-owrynge);
+    color: var(--owrynge);
+}
+
+/* ------- */
+/* BIG BOX */
+/* ------- */

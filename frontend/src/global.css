@@ -17,6 +17,8 @@ html {
 :root {
     --owrynge: rgb(255, 115, 0);
     --light-owrynge: rgb(255, 186, 129);
+    --even-lighter-owrynge: rgb(255, 222, 195);
     --dark-mode-bg: black;
     --light-mode-bg: white;
+    --button-radius: 10px;
 }

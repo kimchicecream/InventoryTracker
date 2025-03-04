@@ -4,7 +4,9 @@ function Inventory() {
     return (
         <div className="inventory">
             <div className='header-container'><h1>Inventory</h1></div>
-            <div className='data-cards-container'></div>
+            <div className='data-cards-container'>
+
+            </div>
             <div className="search-add-container">
                 <div className="search-bar">
                     <div className="search-icon"><i className="fa-solid fa-magnifying-glass"></i></div>
@@ -22,6 +24,7 @@ function Inventory() {
                 <div className="filters-container"></div>
                 <div className="labels-container"></div>
                 <div className='part-container'></div>
+                <div className='pagination'></div>
             </div>
         </div>
     );

@@ -7,8 +7,11 @@
     justify-content: flex-end;
 
     width: 100vw;
+    height: 100vh;
     opacity: 0;
     transition: 0.2s ease-in-out;
+
+    padding: 20px;
 }
 
 .modal-overlay.show {
@@ -18,7 +21,10 @@
 
 .modal-content {
     width: 400px;
-    height: 100vh;
+    height: 100%;
+
+    /* border: 1px solid red; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.267);
 
     background-color: rgba(204, 204, 204, 0.387);
     backdrop-filter: blur(20px);

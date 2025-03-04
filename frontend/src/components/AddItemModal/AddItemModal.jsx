@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { addPart, uploadImage } from "../../api.js"; // Import API functions
+import { addPart, uploadImage } from "../../api.js";
 import "./AddItemModal.css";
 
 function AddItemModal({ isOpen, onClose, onPartAdded }) {
@@ -30,7 +30,7 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
         });
 
         if (fileInputRef.current) {
-            fileInputRef.current.value = ""; // Reset file input
+            fileInputRef.current.value = "";
         }
 
         onClose();
@@ -54,8 +54,8 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
 
         await addPart(newPart);
 
-        onPartAdded(); // Refresh inventory list
-        handleClose(); // Call handleClose to reset form & close modal
+        onPartAdded();
+        handleClose();
     };
 
     if (!isOpen) return null;
@@ -63,7 +63,7 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
     return (
         <div className={`modal-overlay ${isOpen ? "show" : "hide"}`} onClick={handleClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <h2>Add New Item</h2>
+                <h3>Add New Item</h3>
                 <form onSubmit={handleSubmit}>
                     <label>Name:</label>
                     <input type="text" name="name" value={formData.name} onChange={handleChange} required />

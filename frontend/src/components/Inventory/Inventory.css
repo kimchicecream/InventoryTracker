@@ -14,7 +14,7 @@
 
 .inventory .data-cards-container {
     border: 1px solid red;
-
+    margin-bottom: 20px;
 }
 
 .inventory .search-add-container {
@@ -25,10 +25,9 @@
     margin-bottom: 20px;
 }
 
-.inventory .search-add-container .search-bar {
-    /* border: 2px solid red; */
-}
-
+/* ---------- */
+/* SEARCH BAR */
+/* ---------- */
 .search-bar {
     display: flex;
     align-items: center;

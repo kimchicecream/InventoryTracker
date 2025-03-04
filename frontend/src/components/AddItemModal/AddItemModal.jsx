@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { addPart, uploadImage } from "../../api.js"; // Import API functions
 import "./AddItemModal.css";
 
@@ -25,7 +25,7 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
         let imageUrl = null;
 
         if (formData.file) {
-            imageUrl = await uploadImage(formData.file); // Upload the image
+            imageUrl = await uploadImage(formData.file);
         }
 
         const newPart = {
@@ -35,13 +35,13 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
             image: imageUrl,
         };
 
-        await addPart(newPart); // Send part data to backend
-        onPartAdded(); // Refresh inventory list
-        onClose(); // Close modal
+        await addPart(newPart); // send part data to backend
+        onPartAdded(); // refresh inventory list
+        onClose(); // close modal
     };
 
     return (
-        <div className={`modal-overlay ${isOpen ? "show" : ""}`} onClick={onClose}>
+        <div className={`modal-overlay ${isOpen ? "show" : "hide"}`} onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <h2>Add New Item</h2>
                 <form onSubmit={handleSubmit}>
@@ -64,7 +64,7 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
 
                     <button type="submit">Add Item</button>
                 </form>
-                <button className="close-btn" onClick={onClose}>X</button>
+                <button className="close-button" onClick={onClose}>X</button>
             </div>
         </div>
     );

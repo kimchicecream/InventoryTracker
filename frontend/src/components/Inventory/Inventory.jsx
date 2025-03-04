@@ -27,7 +27,7 @@ function Inventory() {
                     <div className="search-icon"><i className="fa-solid fa-magnifying-glass"></i></div>
                     <input type="text" placeholder="Search inventory" className="search-input"/>
                 </div>
-                <button className="add-item-button" onClick={() => setIsModalOpen(true)}>
+                <button className="add-item-button" onClick={() => setIsModalOpen(true) }>
                     <i className="fa-solid fa-plus"></i> Add Item
                 </button>
             </div>
@@ -37,7 +37,7 @@ function Inventory() {
                 <div className='part-container'></div>
                 <div className='pagination'></div>
             </div>
-            <AddItemModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <AddItemModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onPartAdded={loadParts} />
         </div>
     );
 }

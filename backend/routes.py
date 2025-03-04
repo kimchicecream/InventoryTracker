@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Header, File, UploadFile
+from fastapi import APIRouter, Depends, HTTPException, Header, File, UploadFile, Request
 from sqlalchemy.orm import Session
 from database import get_db
 from models import Part
@@ -26,6 +26,7 @@ class PartCreate(BaseModel):
     quantity: int
     # price: float
     link: Optional[str] = None
+    category: Optional[str] = None
     image: Optional[str] = None
 
 class PartUpdate(BaseModel):
@@ -42,13 +43,16 @@ def get_parts(db: Session = Depends(get_db)):
 # POST a new image to S3 bucket
 @router.post("/upload-image")
 def upload_image(file: UploadFile = File(...)):
+    print(f"Received file: {file.filename}, Content-Type: {file.content_type}")
+
     image_url = upload_to_s3(file)
     return {"image_url": image_url}
 
 # POST a new part
 @router.post("/parts")
-def add_part(part: PartCreate, db: Session = Depends(get_db)):
-    new_part = Part(**part.model_dump())
+async def add_part(part: PartCreate, db: Session = Depends(get_db)):
+    print("Received part data:", part.dict())
+    new_part = Part(**part.dict())
     db.add(new_part)
     db.commit()
     db.refresh(new_part)

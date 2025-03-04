@@ -1,24 +1,53 @@
-/* Modal Overlay */
-.modal-overlay {
+/* .modal-overlay {
     position: fixed;
     top: 0;
-    right: -100%; /* Start off-screen */
+    right: -100%;
+
     width: 400px;
     height: 100vh;
+
     background: white;
     box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
     transition: right 0.4s ease-in-out;
     z-index: 1000;
+
+
 }
 
-/* Show the modal */
 .modal-overlay.show {
-    right: 0; /* Slide in */
+    right: 0;
 }
 
-/* Modal Content */
 .modal-content {
     padding: 20px;
+} */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: -100%;
+
+    display: flex;
+    justify-content: flex-end;
+
+    width: 100vw;
+    opacity: 0;
+    transition: 0.2s ease-in-out;
+}
+
+.modal-overlay.show {
+    right: 0;
+    opacity: 1;
+}
+
+.modal-content {
+    width: 400px;
+    height: 100vh;
+    background-color: rgba(204, 204, 204, 0.387);
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
 }
 
 .modal-content h2 {
@@ -55,7 +84,7 @@
 }
 
 /* Close Button */
-.close-btn {
+.close-button {
     position: absolute;
     top: 10px;
     right: 15px;

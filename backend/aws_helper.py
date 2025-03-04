@@ -42,6 +42,6 @@ def upload_to_s3(file):
     )
 
     image_url = f"https://{AWS_S3_BUCKET}.s3.{AWS_REGION}.amazonaws.com/{unique_filename}"
-    print(f"Uploaded image URL: {image_url}")
+    # print(f"Uploaded image URL: {image_url}")
 
     return image_url

@@ -31,7 +31,6 @@ export async function addPart(part, file) {
     return response.data;
 }
 
-
 // GET all parts
 export async function fetchParts() {
     const response = await axios.get(`/parts`);

@@ -20,7 +20,7 @@
     flex-direction: row;
 
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* ---------- */
@@ -63,7 +63,7 @@
 /* --------------- */
 /* ADD ITEM BUTTON */
 /* --------------- */
-.inventory button {
+.inventory .add-item-button {
     all: unset;
     padding: 8px 15px;
     background-color: var(--owrynge);
@@ -74,7 +74,7 @@
     transition: all 0.2s ease-in-out;
 }
 
-.inventory button:hover {
+.inventory .add-item-button:hover {
     cursor: pointer;
     background-color: var(--even-lighter-owrynge);
     color: var(--owrynge);
@@ -99,14 +99,42 @@
     border-top-right-radius: 10px;
 }
 
+
+/* ------ */
+/* LABELS */
+/* ------ */
 .inventory .big-box .labels-container {
-    border: 1px solid rgb(180, 61, 61);
+    display: flex;
+
+    background-color: rgb(220, 220, 220);
+
+    padding: 10px 20px;
+    border-radius: 5px;
 }
 
+/* --------------- */
+/* PARTS CONTAINER */
+/* --------------- */
 .inventory .big-box .part-container {
-    border: 1px solid rgb(0, 255, 136);
+    display: flex;
+    flex-direction: column;
 }
 
-.inventory .big-box .pagination {
+.inventory .part-container .part-item {
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
 
+    padding: 0 20px;
+
+    gap: 20px;
+}
+
+.inventory .part-container .part-item img {
+    height: 70px;
+    width: 70px;
+
+    object-fit: cover;
+
+    border: 1px solid black;
 }

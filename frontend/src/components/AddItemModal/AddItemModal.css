@@ -26,12 +26,18 @@
     /* border: 1px solid red; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.267);
 
-    background-color: rgba(204, 204, 204, 0.387);
-    backdrop-filter: blur(20px);
+    background-color: rgb(255, 255, 255);
+    /* backdrop-filter: blur(20px); */
     padding: 20px;
     border-radius: 10px;
 
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    will-change: opacity, visibility, backdrop-filter;
 }
 
 .modal-content h2 {
@@ -40,7 +46,8 @@
 
 .modal-content label {
     display: block;
-    margin: 10px 0 5px;
+    margin: 10px 0 1px;
+    font-size: 15px;
 }
 
 .modal-content input,
@@ -51,29 +58,34 @@
     border-radius: 5px;
 }
 
-.modal-content button {
-    margin-top: 15px;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: var(--owrynge);
+
+.modal-content .footer-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-buttons .submit-button {
+    all: unset;
+    padding: 10px 20px;
+
+    background-color: var(--owrynge);
+    border-radius: var(--button-radius);
     color: white;
+
+    transition: 0.2s ease-in-out;
+}
+
+.footer-buttons .submit-button:hover {
     cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.2s;
+    background-color: var(--even-lighter-owrynge);
+    color: var(--owrynge);
 }
 
-.modal-content button:hover {
-    background: var(--even-lighter-owrynge);
+.footer-buttons .close-button {
+    all: unset;
 }
 
-/* Close Button */
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 18px;
+.footer-buttons .close-button:hover {
+    text-decoration: underline;
     cursor: pointer;
 }

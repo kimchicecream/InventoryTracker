@@ -25,6 +25,14 @@ function Inventory() {
         );
     };
 
+    const toggleSelectAll = () => {
+        if (selectedParts.length === parts.length) {
+            setSelectedParts([]);
+        } else {
+            setSelectedParts(parts.map((part) => part.id));
+        }
+    };
+
     const capitalizeFirstLetter = (str) => {
         if (!str) return "";
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -48,7 +56,14 @@ function Inventory() {
             <div className="big-box">
                 <div className="filters-container"></div>
                 <div className="labels-container">
-                    <div className="label select-all"></div>
+                    <div className="label select-all">
+                        <input
+                            type="checkbox"
+                            className="checkbox"
+                            checked={selectedParts.length === parts.length && parts.length > 0}
+                            onChange={toggleSelectAll}
+                        />
+                    </div>
                     <div className="label image"></div>
                     <div className="label name">Name</div>
                     <div className="label quantity">Quantity</div>
@@ -63,7 +78,7 @@ function Inventory() {
                                 key={part.id}
                                 className={`part-item ${selectedParts.includes(part.id) ? "selected" : ""}`}
                             >
-                                <div className="select-box">
+                                <div className="part select-box">
                                     <input
                                         type="checkbox"
                                         className="checkbox"
@@ -71,17 +86,18 @@ function Inventory() {
                                         onChange={() => toggleSelect(part.id)}
                                     />
                                 </div>
-                                <img src={part.image || "/placeholder.png"} alt={part.name} className="part-image" />
-                                <p className="part-name">{part.name}</p>
-                                <p className="part-quantity">{part.quantity}</p>
-                                <p className="part-category">{capitalizeFirstLetter(part.category)}</p>
-                                <p className="part-type">{capitalizeFirstLetter(part.type)}</p>
-                                <p className="part-link">
+                                <img src={part.image || "/placeholder.png"} alt={part.name} className="part image" />
+                                <p className="part name">{part.name}</p>
+                                <p className="part quantity">{part.quantity}</p>
+                                <p className="part category">{capitalizeFirstLetter(part.category)}</p>
+                                <p className="part type">{capitalizeFirstLetter(part.type)}</p>
+                                <p className="part link">
                                     <i className="fa-solid fa-link"></i>
                                     <a href={part.link} target="_blank" rel="noopener noreferrer">
                                         {part.link}
                                     </a>
                                 </p>
+                                <div className="part options"><i class="fa-solid fa-ellipsis"></i></div>
                             </div>
                             ))
                         ) : (

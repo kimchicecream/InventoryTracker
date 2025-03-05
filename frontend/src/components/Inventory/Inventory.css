@@ -105,8 +105,8 @@
 /* ------ */
 .inventory .big-box .labels-container {
     display: grid;
-    grid-template-columns: 40px 70px 1fr 100px 120px 120px 1fr;
-    /* align-items: center; */
+    grid-template-columns: 40px 80px 1fr 100px 120px 120px 1fr 1fr;
+    align-items: center;
 
     background-color: rgb(220, 220, 220);
     padding: 15px 0;
@@ -114,10 +114,20 @@
 
     font-size: 15px;
     color: rgb(85, 85, 85);
+
+    /* margin-bottom: 10px; */
 }
 
 .inventory .big-box .labels-container .label {
     /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+}
+
+.inventory .big-box .labels-container .label.select-all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* --------------- */
@@ -130,7 +140,7 @@
 
 .inventory .part-container .part-item {
     display: grid;
-    grid-template-columns: 40px 70px 1fr 100px 120px 120px 1fr;
+    grid-template-columns: 40px 80px 1fr 100px 120px 120px 1fr 1fr;
     align-items: center;
     padding: 10px 0px;
     border-bottom: 1px solid #ddd;
@@ -138,6 +148,23 @@
     font-size: 16px;
 
     transition: background-color 0.2s ease-in-out;
+
+    /* border: 1px solid red; */
+}
+
+.inventory .part-container .part-item .part.link {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.inventory .part-container .part {
+    /* border: 1px solid red; */
+}
+
+.inventory .part-container .part.select-box {
+    display: flex;
+    justify-content: center;
 }
 
 .part-item.selected {
@@ -154,28 +181,40 @@
     border-radius: 10px;
 
     border: 0.5px solid rgb(135, 135, 135);
+
+    justify-self: center;
 }
 
-/* --------- */
-/* CHECK BOX */
-/* --------- */
-.select-box {
+.part-item .options {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
+    justify-self: end;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    transition: 0.2s ease-in-out;
 }
 
-.select-box .checkbox {
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #999;
-    border-radius: 4px;
+.part-item .options:hover {
+    background-color: rgb(230, 230, 230);
     cursor: pointer;
-    position: relative;
+}
+
+/* -------------- */
+/* ITEM CHECK BOX */
+/* -------------- */
+.select-box .checkbox {
+    all: unset;
+
+    border: 2px solid rgb(113, 113, 113);
+    height: 12px;
+    width: 12px;
+    border-radius: 3px;
     transition: all 0.2s ease-in-out;
+}
+
+.select-box .checkbox:hover {
+    cursor: pointer;
 }
 
 .select-box .checkbox:checked {
@@ -183,12 +222,40 @@
     border-color: var(--owrynge);
 }
 
-.select-box .checkbox:checked::after {
-    content: "";
-    position: absolute;
-    font-size: 14px;
-    color: white;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/* --------------- */
+/* LABEL CHECK BOX */
+/* --------------- */
+.select-all .checkbox {
+    all: unset;
+
+    border: 2px solid rgb(113, 113, 113);
+    height: 20px;
+    width: 20px;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
 }
+
+.select-all .checkbox:hover {
+    cursor: pointer;
+}
+
+.select-all .checkbox:checked {
+    background-color: var(--owrynge);
+    border-color: var(--owrynge);
+
+}
+
+/* -------------- */
+/* UP/DOWN CARATS */
+/* -------------- */
+/* .labels-container .up-down-carats {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.labels-container .up-down-carats i {
+    border: 1px solid red;
+} */

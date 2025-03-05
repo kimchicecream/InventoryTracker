@@ -67,11 +67,16 @@
     all: unset;
     padding: 8px 15px;
     background-color: var(--owrynge);
-    border-radius: var(--button-radius);
+    border-radius: 6px;
     color: white;
     font-size: 14px;
 
     transition: all 0.2s ease-in-out;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .inventory .add-item-button:hover {

@@ -50,7 +50,7 @@ function Inventory() {
                     <input type="text" placeholder="Search inventory" className="search-input"/>
                 </div>
                 <button className="add-item-button" onClick={() => setIsModalOpen(true) }>
-                    <i className="fa-solid fa-plus"></i> Add Item
+                    <i className="fa-solid fa-plus"></i>Add Item
                 </button>
             </div>
             <div className="big-box">

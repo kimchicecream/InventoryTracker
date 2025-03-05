@@ -94,7 +94,7 @@
 }
 
 .inventory .big-box .filters-container {
-    height: 100px;
+    /* height: 100px; */
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
@@ -104,12 +104,20 @@
 /* LABELS */
 /* ------ */
 .inventory .big-box .labels-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 40px 70px 1fr 100px 120px 120px 1fr;
+    /* align-items: center; */
 
     background-color: rgb(220, 220, 220);
-
-    padding: 10px 20px;
+    padding: 15px 0;
     border-radius: 5px;
+
+    font-size: 15px;
+    color: rgb(85, 85, 85);
+}
+
+.inventory .big-box .labels-container .label {
+    /* border: 1px solid red; */
 }
 
 /* --------------- */
@@ -121,20 +129,66 @@
 }
 
 .inventory .part-container .part-item {
-    /* border: 1px solid red; */
-    display: flex;
+    display: grid;
+    grid-template-columns: 40px 70px 1fr 100px 120px 120px 1fr;
     align-items: center;
+    padding: 10px 0px;
+    border-bottom: 1px solid #ddd;
 
-    padding: 0 20px;
+    font-size: 16px;
 
-    gap: 20px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.part-item.selected {
+    background-color: rgba(255, 119, 0, 0.244);
+    border-radius: 5px;
 }
 
 .inventory .part-container .part-item img {
-    height: 70px;
-    width: 70px;
+    height: 60px;
+    width: 60px;
 
     object-fit: cover;
 
-    border: 1px solid black;
+    border-radius: 10px;
+
+    border: 0.5px solid rgb(135, 135, 135);
+}
+
+/* --------- */
+/* CHECK BOX */
+/* --------- */
+.select-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.select-box .checkbox {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #999;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+}
+
+.select-box .checkbox:checked {
+    background-color: var(--owrynge);
+    border-color: var(--owrynge);
+}
+
+.select-box .checkbox:checked::after {
+    content: "";
+    position: absolute;
+    font-size: 14px;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

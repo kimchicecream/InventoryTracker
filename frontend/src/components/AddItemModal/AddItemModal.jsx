@@ -98,7 +98,7 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
                     <input type="text" name="link" value={formData.link} onChange={handleChange} />
 
                     <label>Image</label>
-                    <input type="file" onChange={handleFileChange} />
+                    <input type="file" ref={fileInputRef} onChange={handleFileChange} />
                 </form>
                 <div className="footer-buttons">
                     <button className='submit-button' type="submit" form="add-item-form">Add Item</button>

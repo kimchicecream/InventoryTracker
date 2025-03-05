@@ -6,6 +6,7 @@ import './Inventory.css';
 function Inventory() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [parts, setParts] = useState([]);
+    const [selectedParts, setSelectedParts] = useState([]);
 
     useEffect(() => {
         loadParts();
@@ -14,6 +15,19 @@ function Inventory() {
     const loadParts = async () => {
         const data = await fetchParts();
         setParts(data);
+    };
+
+    const toggleSelect = (id) => {
+        setSelectedParts((prevSelected) =>
+            prevSelected.includes(id)
+                ? prevSelected.filter((partId) => partId !== id)
+                : [...prevSelected, id]
+        );
+    };
+
+    const capitalizeFirstLetter = (str) => {
+        if (!str) return "";
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     };
 
     return (
@@ -36,7 +50,7 @@ function Inventory() {
                 <div className="labels-container">
                     <div className="label select-all"></div>
                     <div className="label image"></div>
-                    <div className="label name">Item Name</div>
+                    <div className="label name">Name</div>
                     <div className="label quantity">Quantity</div>
                     <div className="label category">Category</div>
                     <div className="label type">Type</div>
@@ -45,14 +59,30 @@ function Inventory() {
                 <div className='part-container'>
                     {parts.length > 0 ? (
                             parts.map((part) => (
-                                <div key={part.id} className="part-item">
-                                    <img src={part.image || "placeholder.jpg"} alt={part.name} className="part-image" />
-                                    <p>{part.name}</p>
-                                    <p>{part.quantity}</p>
-                                    <p>{part.category}</p>
-                                    <p>{part.type}</p>
-                                    <p>{part.link}</p>
+                            <div
+                                key={part.id}
+                                className={`part-item ${selectedParts.includes(part.id) ? "selected" : ""}`}
+                            >
+                                <div className="select-box">
+                                    <input
+                                        type="checkbox"
+                                        className="checkbox"
+                                        checked={selectedParts.includes(part.id)}
+                                        onChange={() => toggleSelect(part.id)}
+                                    />
                                 </div>
+                                <img src={part.image || "/placeholder.png"} alt={part.name} className="part-image" />
+                                <p className="part-name">{part.name}</p>
+                                <p className="part-quantity">{part.quantity}</p>
+                                <p className="part-category">{capitalizeFirstLetter(part.category)}</p>
+                                <p className="part-type">{capitalizeFirstLetter(part.type)}</p>
+                                <p className="part-link">
+                                    <i className="fa-solid fa-link"></i>
+                                    <a href={part.link} target="_blank" rel="noopener noreferrer">
+                                        {part.link}
+                                    </a>
+                                </p>
+                            </div>
                             ))
                         ) : (
                             <p className="no-items">No items found</p>

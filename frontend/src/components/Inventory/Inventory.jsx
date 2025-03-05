@@ -92,9 +92,8 @@ function Inventory() {
                                 <p className="part category">{capitalizeFirstLetter(part.category)}</p>
                                 <p className="part type">{capitalizeFirstLetter(part.type)}</p>
                                 <p className="part link">
-                                    <i className="fa-solid fa-link"></i>
                                     <a href={part.link} target="_blank" rel="noopener noreferrer">
-                                        {part.link}
+                                        <i className="fa-solid fa-link"></i>
                                     </a>
                                 </p>
                                 <div className="part options"><i class="fa-solid fa-ellipsis"></i></div>

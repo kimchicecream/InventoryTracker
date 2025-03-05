@@ -50,6 +50,8 @@ function Inventory() {
                                     <p>{part.name}</p>
                                     <p>{part.quantity}</p>
                                     <p>{part.category}</p>
+                                    <p>{part.type}</p>
+                                    <p>{part.link}</p>
                                 </div>
                             ))
                         ) : (

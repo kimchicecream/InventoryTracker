@@ -24,8 +24,8 @@ router = APIRouter(
 class PartCreate(BaseModel):
     name: str
     quantity: int
-    # price: float
     link: Optional[str] = None
+    type: Optional[str] = None
     category: Optional[str] = None
     image: Optional[str] = None
 
@@ -33,6 +33,8 @@ class PartUpdate(BaseModel):
     name: Optional[str] = None
     quantity: Optional[int] = None
     link: Optional[str] = None
+    type: Optional[str] = None
+    category: Optional[str] = None
     image: Optional[str] = None
 
 # GET all parts

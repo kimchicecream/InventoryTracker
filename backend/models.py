@@ -16,6 +16,7 @@ class Part(Base):
     link = Column(String, nullable=True)
     image = Column(String, nullable=True)
     category = Column(String, nullable=True)
+    type = Column(String, nullable=True)
 
 # USERS TABLE
 class User(Base):

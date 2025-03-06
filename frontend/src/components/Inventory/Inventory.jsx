@@ -86,15 +86,17 @@ function Inventory() {
                                         onChange={() => toggleSelect(part.id)}
                                     />
                                 </div>
-                                <img src={part.image || "/placeholder.png"} alt={part.name} className="part image" />
+                                <img src={part.image || "placeholder.jpg"} alt={part.name} className="part image" />
                                 <p className="part name">{part.name}</p>
                                 <p className="part quantity">{part.quantity}</p>
                                 <p className="part category">{capitalizeFirstLetter(part.category)}</p>
                                 <p className="part type">{capitalizeFirstLetter(part.type)}</p>
                                 <p className="part link">
-                                    <a href={part.link} target="_blank" rel="noopener noreferrer">
-                                        <i className="fa-solid fa-link"></i>
-                                    </a>
+                                    {part.link && part.link.trim() !== "" ? (
+                                        <a href={part.link} target="_blank" rel="noopener noreferrer">
+                                            <i className="fa-solid fa-link"></i>
+                                        </a>
+                                    ) : null}
                                 </p>
                                 <div className="part options"><i class="fa-solid fa-ellipsis"></i></div>
                             </div>

@@ -7,6 +7,7 @@ function Inventory() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [parts, setParts] = useState([]);
     const [selectedParts, setSelectedParts] = useState([]);
+    const [openDropdown, setOpenDropdown] = useState(null);
 
     useEffect(() => {
         loadParts();
@@ -31,6 +32,20 @@ function Inventory() {
         } else {
             setSelectedParts(parts.map((part) => part.id));
         }
+    };
+
+    const handleEllipsisClick = (id) => {
+        setOpenDropdown(openDropdown === id ? null : id);
+    };
+
+    const handleEdit = (id) => {
+        console.log(`Edit part: ${id}`);
+        setOpenDropdown(null);
+    };
+
+    const handleDelete = (id) => {
+        console.log(`Delete part: ${id}`);
+        setOpenDropdown(null);
     };
 
     const capitalizeFirstLetter = (str) => {
@@ -98,7 +113,16 @@ function Inventory() {
                                         </a>
                                     ) : null}
                                 </p>
-                                <div className="part options"><i class="fa-solid fa-ellipsis"></i></div>
+                                <div className="part options"onClick={() => handleEllipsisClick(part.id)}>
+                                    <i class="fa-solid fa-ellipsis">
+                                        {openDropdown === part.id && (
+                                            <div className="dropdown-menu">
+                                                <button onClick={() => handleEdit(part.id)}>Edit</button>
+                                                <button onClick={() => handleDelete(part.id)}>Delete</button>
+                                            </div>
+                                        )}
+                                    </i>
+                                </div>
                             </div>
                             ))
                         ) : (

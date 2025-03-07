@@ -9,7 +9,9 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
         category: "",
         type: "",
         link: "",
+        parts_per_machine: "",
         file: null,
+
     });
 
     const fileInputRef = useRef(null);
@@ -31,6 +33,7 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
             category: "",
             type: "",
             link: "",
+            parts_per_machine: "",
             file: null,
         });
 
@@ -56,6 +59,7 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
             category: formData.category,
             type: formData.type,
             link: formData.link,
+            parts_per_machine: parseInt(formData.parts_per_machine, 10),
             image: imageUrl,
         };
 
@@ -96,6 +100,9 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
 
                     <label>Link</label>
                     <input type="text" name="link" value={formData.link} onChange={handleChange} />
+
+                    <label>Parts per Machine</label>
+                    <input type="number" name="parts_per_machine" value={formData.parts_per_machine} onChange={handleChange} required />
 
                     <label>Image</label>
                     <input type="file" ref={fileInputRef} onChange={handleFileChange} />

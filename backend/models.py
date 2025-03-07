@@ -17,6 +17,7 @@ class Part(Base):
     image = Column(String, nullable=True)
     category = Column(String, nullable=True)
     type = Column(String, nullable=True)
+    parts_per_machine = Column(Integer, nullable=True)
 
 # USERS TABLE
 class User(Base):

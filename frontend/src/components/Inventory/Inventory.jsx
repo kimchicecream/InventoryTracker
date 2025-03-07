@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { fetchParts } from "../../api";
 import './Inventory.css';
@@ -8,6 +8,7 @@ function Inventory() {
     const [parts, setParts] = useState([]);
     const [selectedParts, setSelectedParts] = useState([]);
     const [openDropdown, setOpenDropdown] = useState(null);
+    const dropdownRef = useRef(null);
 
     useEffect(() => {
         loadParts();
@@ -48,6 +49,19 @@ function Inventory() {
         setOpenDropdown(null);
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setOpenDropdown(null);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     const capitalizeFirstLetter = (str) => {
         if (!str) return "";
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -57,7 +71,34 @@ function Inventory() {
         <div className="inventory">
             <div className='header-container'><h1>Inventory</h1></div>
             <div className='data-cards-container'>
-
+                <div className="data-card" id='one'>
+                    <div className="title-number">
+                        <div className="data-title"></div>
+                        <div className="data-number"></div>
+                    </div>
+                    <div className="changes"></div>
+                </div>
+                <div className="data-card" id="two">
+                    <div className="title-number">
+                        <div className="data-title"></div>
+                        <div className="data-number"></div>
+                    </div>
+                    <div className="changes"></div>
+                </div>
+                <div className="data-card" id="three">
+                    <div className="title-number">
+                        <div className="data-title"></div>
+                        <div className="data-number"></div>
+                    </div>
+                    <div className="changes"></div>
+                </div>
+                <div className="data-card" id="four">
+                    <div className="title-number">
+                        <div className="data-title"></div>
+                        <div className="data-number"></div>
+                    </div>
+                    <div className="changes"></div>
+                </div>
             </div>
             <div className="search-add-container">
                 <div className="search-bar">
@@ -82,7 +123,7 @@ function Inventory() {
                     <div className="label image"></div>
                     <div className="label name">Name</div>
                     <div className="label quantity">Quantity</div>
-                    <div className="parts ppm">PPM</div>
+                    <div className="label ppm">PPM</div>
                     <div className="label category">Category</div>
                     <div className="label type">Type</div>
                     <div className="label link">Link</div>
@@ -115,11 +156,12 @@ function Inventory() {
                                         </a>
                                     ) : null}
                                 </p>
-                                <div className="part options"onClick={() => handleEllipsisClick(part.id)}>
+                                <div className="part options" onClick={() => handleEllipsisClick(part.id)} ref={dropdownRef}>
                                     <i class="fa-solid fa-ellipsis">
                                         {openDropdown === part.id && (
                                             <div className="dropdown-menu">
                                                 <button onClick={() => handleEdit(part.id)}>Edit</button>
+                                                <span></span>
                                                 <button onClick={() => handleDelete(part.id)}>Delete</button>
                                             </div>
                                         )}

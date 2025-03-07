@@ -28,7 +28,7 @@ class PartCreate(BaseModel):
     type: Optional[str] = None
     category: Optional[str] = None
     image: Optional[str] = None
-    parts_per_machine: Optional[str] = None
+    parts_per_machine: Optional[int] = None
 
 class PartUpdate(BaseModel):
     name: Optional[str] = None
@@ -37,7 +37,7 @@ class PartUpdate(BaseModel):
     type: Optional[str] = None
     category: Optional[str] = None
     image: Optional[str] = None
-    parts_per_machine: Optional[str] = None
+    parts_per_machine: Optional[int] = None
 
 # GET all parts
 @router.get("/parts")

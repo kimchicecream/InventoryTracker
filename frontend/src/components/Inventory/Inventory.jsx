@@ -82,6 +82,7 @@ function Inventory() {
                     <div className="label image"></div>
                     <div className="label name">Name</div>
                     <div className="label quantity">Quantity</div>
+                    <div className="parts ppm">PPM</div>
                     <div className="label category">Category</div>
                     <div className="label type">Type</div>
                     <div className="label link">Link</div>
@@ -104,6 +105,7 @@ function Inventory() {
                                 <img src={part.image || "placeholder.jpg"} alt={part.name} className="part image" />
                                 <p className="part name">{part.name}</p>
                                 <p className="part quantity">{part.quantity}</p>
+                                <p className="part ppm">{part.parts_per_machine}</p>
                                 <p className="part category">{capitalizeFirstLetter(part.category)}</p>
                                 <p className="part type">{capitalizeFirstLetter(part.type)}</p>
                                 <p className="part link">

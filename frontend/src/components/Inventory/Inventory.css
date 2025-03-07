@@ -110,7 +110,7 @@
 /* ------ */
 .inventory .big-box .labels-container {
     display: grid;
-    grid-template-columns: 40px 100px 5fr 200px 200px 200px 200px 1fr;
+    grid-template-columns: 40px 100px 5fr 100px 100px 200px 200px 200px 1fr;
     align-items: center;
 
     background-color: rgb(228, 228, 228);
@@ -145,7 +145,7 @@
 
 .inventory .part-container .part-item {
     display: grid;
-    grid-template-columns: 40px 100px 5fr 200px 200px 200px 200px 1fr;
+    grid-template-columns: 40px 100px 5fr 100px 100px 200px 200px 200px 1fr;
     align-items: center;
     padding: 10px 0px;
     border-bottom: 1px solid #ddd;

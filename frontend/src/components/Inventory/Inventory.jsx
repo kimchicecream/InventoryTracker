@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { fetchParts } from "../../api";
+import { getLowStockParts, capitalizeFirstLetter, isLowStock } from "../../utils/inventoryLogic";
 import './Inventory.css';
 
 function Inventory() {
@@ -67,20 +68,26 @@ function Inventory() {
         };
     }, [openDropdown]);
 
-
-    const capitalizeFirstLetter = (str) => {
-        if (!str) return "";
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    };
+    const lowStockParts = getLowStockParts(parts);
+    const lowStockCount = lowStockParts.length;
 
     return (
         <div className="inventory">
             <div className='header-container'><h1>Inventory</h1></div>
+            <div className="search-add-container">
+                <div className="search-bar">
+                    <div className="search-icon"><i className="fa-solid fa-magnifying-glass"></i></div>
+                    <input type="text" placeholder="Search inventory" className="search-input"/>
+                </div>
+                <button className="add-item-button" onClick={() => setIsModalOpen(true) }>
+                    <i className="fa-solid fa-plus"></i>Add Item
+                </button>
+            </div>
             <div className='data-cards-container'>
                 <div className="data-card" id='one'>
                     <div className="title-number">
-                        <div className="data-title"></div>
-                        <div className="data-number"></div>
+                        <div className="data-title">Low stock items</div>
+                        <div className="data-number">{lowStockCount}</div>
                     </div>
                     <div className="changes"></div>
                 </div>
@@ -105,15 +112,6 @@ function Inventory() {
                     </div>
                     <div className="changes"></div>
                 </div>
-            </div>
-            <div className="search-add-container">
-                <div className="search-bar">
-                    <div className="search-icon"><i className="fa-solid fa-magnifying-glass"></i></div>
-                    <input type="text" placeholder="Search inventory" className="search-input"/>
-                </div>
-                <button className="add-item-button" onClick={() => setIsModalOpen(true) }>
-                    <i className="fa-solid fa-plus"></i>Add Item
-                </button>
             </div>
             <div className="big-box">
                 <div className="filters-container"></div>

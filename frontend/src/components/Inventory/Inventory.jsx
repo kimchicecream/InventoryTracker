@@ -8,7 +8,7 @@ function Inventory() {
     const [parts, setParts] = useState([]);
     const [selectedParts, setSelectedParts] = useState([]);
     const [openDropdown, setOpenDropdown] = useState(null);
-    const dropdownRef = useRef(null);
+    const dropdownRefs = useRef(new Map());
 
     useEffect(() => {
         loadParts();
@@ -36,6 +36,7 @@ function Inventory() {
     };
 
     const handleEllipsisClick = (id) => {
+        event.stopPropagation();
         setOpenDropdown(openDropdown === id ? null : id);
     };
 
@@ -51,7 +52,11 @@ function Inventory() {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            if (
+                openDropdown !== null &&
+                dropdownRefs.current.get(openDropdown) &&
+                !dropdownRefs.current.get(openDropdown).contains(event.target)
+            ) {
                 setOpenDropdown(null);
             }
         };
@@ -60,7 +65,8 @@ function Inventory() {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
+    }, [openDropdown]);
+
 
     const capitalizeFirstLetter = (str) => {
         if (!str) return "";
@@ -156,16 +162,18 @@ function Inventory() {
                                         </a>
                                     ) : null}
                                 </p>
-                                <div className="part options" onClick={() => handleEllipsisClick(part.id)} ref={dropdownRef}>
-                                    <i class="fa-solid fa-ellipsis">
-                                        {openDropdown === part.id && (
-                                            <div className="dropdown-menu">
-                                                <button onClick={() => handleEdit(part.id)}>Edit</button>
-                                                <span></span>
-                                                <button onClick={() => handleDelete(part.id)}>Delete</button>
-                                            </div>
-                                        )}
-                                    </i>
+                                <div className="part options" onClick={(e) => handleEllipsisClick(part.id, e)}>
+                                    <i className="fa-solid fa-ellipsis"></i>
+                                    {openDropdown === part.id && (
+                                        <div
+                                            className="dropdown-menu"
+                                            ref={(el) => dropdownRefs.current.set(part.id, el)}
+                                        >
+                                            <button onClick={() => handleEdit(part.id)}>Edit</button>
+                                            <span></span>
+                                            <button onClick={() => handleDelete(part.id)}>Delete</button>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             ))

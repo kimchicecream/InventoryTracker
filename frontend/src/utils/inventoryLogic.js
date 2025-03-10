@@ -5,7 +5,7 @@ export const getLowStockParts = (parts) => {
         const partsPerMachine = part.parts_per_machine || 0;
 
         // Calculate reorder threshold (2 weeks worth of stock)
-        const reorderThreshold = partsPerMachine * 12;
+        const reorderThreshold = partsPerMachine * 2 * 6; // Each week is 6 machines
 
         // If the part is needed in machines and stock is below threshold
         if (partsPerMachine > 0 && quantity < reorderThreshold) {
@@ -32,6 +32,6 @@ export const capitalizeFirstLetter = (str) => {
 export const isLowStock = (part) => {
     const quantity = part.quantity || 0;
     const partsPerMachine = part.parts_per_machine || 0;
-    const reorderThreshold = partsPerMachine * 12;
+    const reorderThreshold = partsPerMachine * 2 * 6;
     return (partsPerMachine > 0 && quantity < reorderThreshold) || (partsPerMachine === 0 && quantity > 0 && quantity < 5) || quantity === 0;
 };

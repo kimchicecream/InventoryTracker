@@ -86,7 +86,13 @@ function Inventory() {
             <div className='data-cards-container'>
                 <div className="data-card" id='one'>
                     <div className="title-number">
-                        <div className="data-title">Low stock items</div>
+                        <div className="data-title">
+                            Unavailable parts
+                            <div className="tooltip-container">
+                                <i className="fa-solid fa-circle-info"></i>
+                                <div className="tooltip">Items that have less quantity than its parts per machine, meaning a machine can't be completed until the item is restocked.</div>
+                            </div>
+                        </div>
                         <div className="data-number">{lowStockCount}</div>
                     </div>
                     <div className="changes"></div>

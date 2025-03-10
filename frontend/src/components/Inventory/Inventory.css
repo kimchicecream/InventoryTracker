@@ -347,8 +347,45 @@
 .data-card .title-number .data-title {
     font-size: 15px;
     color: rgb(116, 116, 116);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .data-card .title-number .data-number {
     font-size: 25px;
+}
+
+.tooltip-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: -105px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+
+    width: 160px;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.tooltip-container:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
 }

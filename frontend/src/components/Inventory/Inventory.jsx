@@ -36,10 +36,11 @@ function Inventory() {
         }
     };
 
-    const handleEllipsisClick = (id) => {
+    const handleEllipsisClick = (id, event) => {
         event.stopPropagation();
-        setOpenDropdown(openDropdown === id ? null : id);
+        setOpenDropdown((prev) => (prev === id ? null : id));
     };
+
 
     const handleEdit = (id) => {
         console.log(`Edit part: ${id}`);
@@ -62,11 +63,12 @@ function Inventory() {
             }
         };
 
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("click", handleClickOutside);
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("click", handleClickOutside);
         };
     }, [openDropdown]);
+
 
     const unavailablePartsCount = getUnavailableParts(parts).length;
     const lowStockCount = getLowStockItems(parts).length;

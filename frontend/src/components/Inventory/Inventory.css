@@ -139,8 +139,8 @@
     flex-direction: column;
     height: 100%;
 
-    overflow: hidden;
-    overflow-y: auto;
+    /* overflow: hidden;
+    overflow-y: auto; */
 
     /* border: 1px solid red; */
 }
@@ -217,11 +217,11 @@
     position: absolute;
     top: 30px;
     right: 0;
-    background: rgba(255, 255, 255, 0.884);
+    background: rgb(255, 255, 255);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     width: 100px;
-    z-index: 10;
+    z-index: 100;
     display: flex;
     flex-direction: column;
 }

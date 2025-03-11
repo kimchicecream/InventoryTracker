@@ -1,5 +1,4 @@
-// Get parts that are low in stock based on the 2-week reorder threshold
-export const getLowStockParts = (parts) => {
+export const getUnavailableParts = (parts) => {
     return parts.filter(part => {
         const quantity = part.quantity || 0;
         const partsPerMachine = part.parts_per_machine || 0;
@@ -34,4 +33,30 @@ export const isLowStock = (part) => {
     const partsPerMachine = part.parts_per_machine || 0;
     const reorderThreshold = partsPerMachine * 2 * 6;
     return (partsPerMachine > 0 && quantity < reorderThreshold) || (partsPerMachine === 0 && quantity > 0 && quantity < 5) || quantity === 0;
+};
+
+export const getLowStockItems = (parts) => {
+    return parts.filter(part =>
+        part.parts_per_machine &&
+        part.quantity > 0 &&
+        part.quantity < (part.parts_per_machine * 6)
+    );
+};
+
+// Calculate the maximum number of machines that can be built based on available stock
+export const getMachinesPossible = (parts) => {
+    if (!parts.length) return 0;
+
+    // Filter out parts that are required for machine assembly
+    const machineParts = parts.filter(part => part.parts_per_machine > 0);
+
+    // Determine the fewest machines that can be built based on the lowest available stock
+    if (machineParts.length === 0) return 0; // No parts assigned to machines
+
+    return Math.min(...machineParts.map(part => Math.floor(part.quantity / part.parts_per_machine)));
+};
+
+// Get total number of unique parts in inventory
+export const getTotalUniqueParts = (parts) => {
+    return parts.length; // The number of unique part entries in the inventory
 };

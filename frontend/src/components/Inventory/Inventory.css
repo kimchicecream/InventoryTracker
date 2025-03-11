@@ -365,7 +365,7 @@
 
 .tooltip {
     position: absolute;
-    bottom: -105px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
 

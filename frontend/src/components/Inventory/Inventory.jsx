@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { fetchParts } from "../../api";
-import { getLowStockParts, capitalizeFirstLetter, isLowStock } from "../../utils/inventoryLogic";
+import { getUnavailableParts, capitalizeFirstLetter, getLowStockItems, getMachinesPossible, getTotalUniqueParts } from "../../utils/inventoryLogic";
 import './Inventory.css';
 
 function Inventory() {
@@ -68,8 +68,10 @@ function Inventory() {
         };
     }, [openDropdown]);
 
-    const lowStockParts = getLowStockParts(parts);
-    const lowStockCount = lowStockParts.length;
+    const unavailablePartsCount = getUnavailableParts(parts).length;
+    const lowStockCount = getLowStockItems(parts).length;
+    const totalMachinesBuildable = getMachinesPossible(parts);
+    const totalUniqueParts = getTotalUniqueParts(parts);
 
     return (
         <div className="inventory">
@@ -93,28 +95,46 @@ function Inventory() {
                                 <div className="tooltip">Items that have less quantity than its parts per machine, meaning a machine can't be completed until the item is restocked.</div>
                             </div>
                         </div>
-                        <div className="data-number">{lowStockCount}</div>
+                        <div className="data-number">{unavailablePartsCount}</div>
                     </div>
                     <div className="changes"></div>
                 </div>
                 <div className="data-card" id="two">
                     <div className="title-number">
-                        <div className="data-title"></div>
-                        <div className="data-number"></div>
+                        <div className="data-title">
+                            Low stock items
+                            <div className="tooltip-container">
+                                <i className="fa-solid fa-circle-info"></i>
+                                <div className="tooltip">Items that don't have enough quantity to complete the next 6 machines.</div>
+                            </div>
+                        </div>
+                        <div className="data-number">{lowStockCount}</div>
                     </div>
                     <div className="changes"></div>
                 </div>
                 <div className="data-card" id="three">
                     <div className="title-number">
-                        <div className="data-title"></div>
-                        <div className="data-number"></div>
+                        <div className="data-title">
+                            Total machines possible
+                            <div className="tooltip-container">
+                                <i className="fa-solid fa-circle-info"></i>
+                                <div className="tooltip">The total number of machines that are possible to complete with current inventory quantity.</div>
+                            </div>
+                        </div>
+                        <div className="data-number">{totalMachinesBuildable}</div>
                     </div>
                     <div className="changes"></div>
                 </div>
                 <div className="data-card" id="four">
                     <div className="title-number">
-                        <div className="data-title"></div>
-                        <div className="data-number"></div>
+                        <div className="data-title">
+                            Total items
+                            <div className="tooltip-container">
+                                <i className="fa-solid fa-circle-info"></i>
+                                <div className="tooltip">The total number of unqiue items in the inventory.</div>
+                            </div>
+                        </div>
+                        <div className="data-number">{totalUniqueParts}</div>
                     </div>
                     <div className="changes"></div>
                 </div>

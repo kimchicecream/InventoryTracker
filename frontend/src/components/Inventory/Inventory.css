@@ -106,7 +106,7 @@
 /* ------ */
 .inventory .big-box .labels-container {
     display: grid;
-    grid-template-columns: 40px 100px 5fr 150px 150px 150px 150px 150px 1fr;
+    grid-template-columns: 40px 30px 3fr 100px 100px 120px 120px 120px 120px 120px 1fr;
     align-items: center;
 
     background-color: rgb(228, 228, 228);
@@ -147,12 +147,12 @@
 
 .inventory .part-container .part-item {
     display: grid;
-    grid-template-columns: 40px 100px 5fr 150px 150px 150px 150px 150px 1fr;
+    grid-template-columns: 40px 30px 3fr 100px 100px 120px 120px 120px 120px 120px 1fr;
     align-items: center;
-    padding: 5px 0px;
+    padding: 0px 0px;
     border-bottom: 1px solid #ddd;
 
-    font-size: 16px;
+    font-size: 15px;
 
     transition: background-color 0.2s ease-in-out;
 
@@ -388,4 +388,34 @@
 .tooltip-container:hover .tooltip {
     opacity: 1;
     visibility: visible;
+}
+
+.part.availability {
+    font-weight: bold;
+    padding: 2px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-align: center;
+    width: 100px;
+}
+
+/* Out of Stock (Red) */
+.part.availability.out-of-stock {
+    background-color: #ffcccc;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+}
+
+/* Low Stock (Yellow) */
+.part.availability.low-stock {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #856404;
+}
+
+/* In Stock (Green) */
+.part.availability.in-stock {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #155724;
 }

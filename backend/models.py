@@ -18,6 +18,7 @@ class Part(Base):
     category = Column(String, nullable=True)
     type = Column(String, nullable=True)
     parts_per_machine = Column(Integer, nullable=True)
+    status = Column(String, nullable=True)
 
 # USERS TABLE
 class User(Base):

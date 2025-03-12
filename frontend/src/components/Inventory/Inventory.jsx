@@ -69,6 +69,15 @@ function Inventory() {
         };
     }, [openDropdown]);
 
+    const getAvailabilityStatus = (part) => {
+        if (part.quantity === 0) {
+            return { label: "Out of Stock", className: "out-of-stock" };
+        }
+        if (part.parts_per_machine > 0 && part.quantity < part.parts_per_machine * 6) {
+            return { label: "Low Stock", className: "low-stock" };
+        }
+        return { label: "In Stock", className: "in-stock" };
+    };
 
     const unavailablePartsCount = getUnavailableParts(parts).length;
     const lowStockCount = getLowStockItems(parts).length;
@@ -78,15 +87,6 @@ function Inventory() {
     return (
         <div className="inventory">
             <div className='header-container'><h1>Inventory</h1></div>
-            <div className="search-add-container">
-                <div className="search-bar">
-                    <div className="search-icon"><i className="fa-solid fa-magnifying-glass"></i></div>
-                    <input type="text" placeholder="Search inventory" className="search-input"/>
-                </div>
-                <button className="add-item-button" onClick={() => setIsModalOpen(true) }>
-                    <i className="fa-solid fa-plus"></i>Add Item
-                </button>
-            </div>
             <div className='data-cards-container'>
                 <div className="data-card" id='one'>
                     <div className="title-number">
@@ -141,6 +141,15 @@ function Inventory() {
                     <div className="changes"></div>
                 </div>
             </div>
+            <div className="search-add-container">
+                <div className="search-bar">
+                    <div className="search-icon"><i className="fa-solid fa-magnifying-glass"></i></div>
+                    <input type="text" placeholder="Search inventory" className="search-input"/>
+                </div>
+                <button className="add-item-button" onClick={() => setIsModalOpen(true) }>
+                    <i className="fa-solid fa-plus"></i>Add Item
+                </button>
+            </div>
             <div className="big-box">
                 <div className="filters-container"></div>
                 <div className="labels-container">
@@ -159,10 +168,14 @@ function Inventory() {
                     <div className="label category">Category</div>
                     <div className="label type">Type</div>
                     <div className="label link">Link</div>
+                    <div className="label status">Order status</div>
+                    <div className="label availability">Availability</div>
                 </div>
                 <div className='part-container'>
-                    {parts.length > 0 ? (
-                            parts.map((part) => (
+                    {parts.map((part) => {
+                        const { label, className } = getAvailabilityStatus(part); // ✅ Fix here
+
+                        return (
                             <div
                                 key={part.id}
                                 className={`part-item ${selectedParts.includes(part.id) ? "selected" : ""}`}
@@ -175,7 +188,7 @@ function Inventory() {
                                         onChange={() => toggleSelect(part.id)}
                                     />
                                 </div>
-                                <img src={part.image || "placeholder.jpg"} alt={part.name} className="part image" />
+                                <p className="part placeholder"></p>
                                 <p className="part name">{part.name}</p>
                                 <p className="part quantity">{part.quantity}</p>
                                 <p className="part ppm">{part.parts_per_machine}</p>
@@ -188,6 +201,8 @@ function Inventory() {
                                         </a>
                                     ) : null}
                                 </p>
+                                <p className="part status">{part.status}</p>
+                                <p className={`part availability ${className}`}>{label}</p>
                                 <div className="part options" onClick={(e) => handleEllipsisClick(part.id, e)}>
                                     <i className="fa-solid fa-ellipsis"></i>
                                     {openDropdown === part.id && (
@@ -202,10 +217,8 @@ function Inventory() {
                                     )}
                                 </div>
                             </div>
-                            ))
-                        ) : (
-                            <p className="no-items">No items found</p>
-                        )}
+                        );
+                    })}
                 </div>
                 <div className='pagination'></div>
             </div>

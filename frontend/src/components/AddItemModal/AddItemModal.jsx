@@ -34,6 +34,7 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
             type: "",
             link: "",
             parts_per_machine: "",
+            status: "",
             file: null,
         });
 
@@ -105,8 +106,8 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
                     <label>Parts per Machine</label>
                     <input type="number" name="parts_per_machine" value={formData.parts_per_machine} onChange={handleChange} required />
 
-                    <label>Image</label>
-                    <input type="file" ref={fileInputRef} onChange={handleFileChange} />
+                    {/* <label>Image</label>
+                    <input type="file" ref={fileInputRef} onChange={handleFileChange} /> */}
                 </form>
                 <div className="footer-buttons">
                     <button className='submit-button' type="submit" form="add-item-form">Add Item</button>

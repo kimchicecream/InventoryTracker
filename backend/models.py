@@ -18,7 +18,7 @@ class Part(Base):
     category = Column(String, nullable=True)
     type = Column(String, nullable=True)
     parts_per_machine = Column(Integer, nullable=True)
-    status = Column(String, nullable=True)
+    status = Column(String, nullable=False, default="Unordered")
 
 # USERS TABLE
 class User(Base):

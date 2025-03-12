@@ -29,7 +29,7 @@ class PartCreate(BaseModel):
     category: Optional[str] = None
     image: Optional[str] = None
     parts_per_machine: Optional[int] = None
-    status: Optional[int] = None
+    status: Optional[str] = "Unordered"
 
 class PartUpdate(BaseModel):
     name: Optional[str] = None
@@ -58,7 +58,8 @@ def upload_image(file: UploadFile = File(...)):
 @router.post("/parts")
 async def add_part(part: PartCreate, db: Session = Depends(get_db)):
     print("Received part data:", part.dict())
-    new_part = Part(**part.dict())
+
+    new_part = Part(**part.dict(exclude_unset=True))
     db.add(new_part)
     db.commit()
     db.refresh(new_part)

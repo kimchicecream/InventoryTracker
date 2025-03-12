@@ -173,7 +173,7 @@ function Inventory() {
                 </div>
                 <div className='part-container'>
                     {parts.map((part) => {
-                        const { label, className } = getAvailabilityStatus(part); // ✅ Fix here
+                        const { label, className } = getAvailabilityStatus(part);
 
                         return (
                             <div

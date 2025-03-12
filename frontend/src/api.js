@@ -33,18 +33,18 @@ export async function addPart(part, file) {
 
 // GET all parts
 export async function fetchParts() {
-    const response = await axios.get(`/parts`);
+    const response = await axios.get(`${API_URL}/parts`);
     return response.data;
 }
 
 // UPDATE part
 export async function updatePart(id, part) {
-    const response = await axios.put(`/parts/${id}`, part);
+    const response = await axios.put(`${API_URL}/parts/${id}`, part);
     return response.data;
 }
 
 // DELETE part
 export async function deletePart(id) {
-    const response = await axios.delete(`/parts/${id}`);
+    const response = await axios.delete(`${API_URL}/parts/${id}`);
     return response.data;
 }

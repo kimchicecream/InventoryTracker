@@ -39,7 +39,7 @@ class PartUpdate(BaseModel):
     category: Optional[str] = None
     image: Optional[str] = None
     parts_per_machine: Optional[int] = None
-    status: Optional[int] = None
+    status: Optional[str] = None
 
 # GET all parts
 @router.get("/parts")

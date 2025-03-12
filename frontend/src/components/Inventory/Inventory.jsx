@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import { fetchParts } from "../../api";
+import { fetchParts, updatePart } from "../../api";
 import { getUnavailableParts, capitalizeFirstLetter, getLowStockItems, getMachinesPossible, getTotalUniqueParts } from "../../utils/inventoryLogic";
 import './Inventory.css';
 
@@ -68,6 +68,26 @@ function Inventory() {
             document.removeEventListener("click", handleClickOutside);
         };
     }, [openDropdown]);
+
+    const toggleOrderStatus = async (part) => {
+        const newStatus = part.status === "Unordered" ? "Ordered" : "Unordered";
+
+        try {
+            console.log("Updating part ID:", part.id);
+            console.log("Sending status:", newStatus);
+
+            const updatedPart = await updatePart(part.id, { status: newStatus });
+
+            setParts((prevParts) =>
+                prevParts.map((p) => (p.id === part.id ? { ...p, status: updatedPart.status } : p))
+            );
+
+            console.log("Update successful:", updatedPart);
+        } catch (error) {
+            console.error("Error updating order status:", error.response?.data || error.message);
+        }
+    };
+
 
     const getAvailabilityStatus = (part) => {
         if (part.quantity === 0) {
@@ -201,7 +221,7 @@ function Inventory() {
                                         </a>
                                     ) : null}
                                 </p>
-                                <p className="part status">{part.status}</p>
+                                <p className={`part status ${part.status.toLowerCase()}`} onClick={() => toggleOrderStatus(part)}>{part.status}</p>
                                 <p className={`part availability ${className}`}>{label}</p>
                                 <div className="part options" onClick={(e) => handleEllipsisClick(part.id, e)}>
                                     <i className="fa-solid fa-ellipsis"></i>

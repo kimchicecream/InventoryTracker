@@ -27,24 +27,24 @@ export async function addPart(part, file) {
     const imageUrl = await uploadImage(file);
     part.image = imageUrl;
   }
-  const response = await axios.post(`/api/parts`, part);
+  const response = await axios.post(`/parts`, part);
   return response.data;
 }
 
 // GET all parts
 export async function fetchParts() {
-  const response = await axios.get(`/api/parts`);
+  const response = await axios.get(`/parts`);
   return response.data;
 }
 
 // UPDATE part
 export async function updatePart(id, part) {
-  const response = await axios.put(`/api/parts/${id}`, part);
+  const response = await axios.put(`/parts/${id}`, part);
   return response.data;
 }
 
 // DELETE part
 export async function deletePart(id) {
-  const response = await axios.delete(`/api/parts/${id}`);
+  const response = await axios.delete(`/parts/${id}`);
   return response.data;
 }

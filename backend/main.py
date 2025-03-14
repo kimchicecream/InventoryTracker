@@ -22,7 +22,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
+app.include_router(router, prefix="/api")
+
 if ENV == "production":
     app.mount("/", StaticFiles(directory="backend/static", html=True), name="static")
-
-app.include_router(router, prefix="/api")

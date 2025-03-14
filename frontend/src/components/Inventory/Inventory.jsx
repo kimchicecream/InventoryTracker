@@ -20,6 +20,7 @@ function Inventory() {
 
     const loadParts = async () => {
         const data = await fetchParts();
+        console.log("Parts received from API:", data);
         setParts(data);
     };
 

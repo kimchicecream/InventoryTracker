@@ -234,7 +234,7 @@ function Inventory() {
                                 <p className="part quantity">{part.quantity}</p>
                                 <p className="part ppm">{part.parts_per_machine}</p>
                                 <p className="part category">{capitalizeFirstLetter(part.category)}</p>
-                                <p className="part type">{capitalizeFirstLetter(part.type)}</p>
+                                <p className="part type">{capitalizeFirstLetter(part.part_type)}</p>
                                 <p className="part link">
                                     {part.link && part.link.trim() !== "" ? (
                                         <a href={part.link} target="_blank" rel="noopener noreferrer">

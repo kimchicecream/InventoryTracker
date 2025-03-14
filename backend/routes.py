@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from typing import Optional
 import os
 from dotenv import load_dotenv
-from aws_helper import upload_to_s3
+from backend.aws_helper import upload_to_s3
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")

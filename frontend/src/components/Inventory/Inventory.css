@@ -169,10 +169,6 @@
     gap: 10px;
 }
 
-.inventory .part-container .part {
-    /* border: 1px solid red; */
-}
-
 .inventory .part-container .part.select-box {
     display: flex;
     justify-content: center;

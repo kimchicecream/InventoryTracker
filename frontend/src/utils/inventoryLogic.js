@@ -3,12 +3,12 @@ export const getUnavailableParts = (parts) => {
         const quantity = part.quantity || 0;
         const partsPerMachine = part.parts_per_machine || 0;
 
-        // Calculate reorder threshold (2 weeks worth of stock)
-        const reorderThreshold = partsPerMachine * 2 * 6; // Each week is 6 machines
-
-        // If the part is needed in machines and stock is below threshold
-        if (partsPerMachine > 0 && quantity < reorderThreshold) {
-            return true;
+        // If the part is required for machine assembly
+        if (partsPerMachine > 0) {
+            // If stock is less than needed for one machine, it's unavailable
+            if (quantity < partsPerMachine) {
+                return true;
+            }
         }
 
         // General low stock threshold for non-machine parts

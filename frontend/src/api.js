@@ -27,7 +27,11 @@ export async function addPart(part, file) {
     const imageUrl = await uploadImage(file);
     part.image = imageUrl;
   }
-  const response = await axios.post(`/parts`, part);
+
+  const response = await axios.post(`/parts`, part, {
+    headers: { "Content-Type": "application/json" },
+  });
+
   return response.data;
 }
 

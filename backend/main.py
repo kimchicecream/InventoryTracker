@@ -1,16 +1,27 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.routes import router
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
+
+# Set allowed origins dynamically
+ENV = os.getenv("ENV", "development")
+if ENV == "production":
+    ALLOWED_ORIGINS = [os.getenv("FRONTEND_URL", "https://invtrackr.onrender.com")]
+else:
+    ALLOWED_ORIGINS = ["http://localhost:5173"]
 
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # frontend url
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],  # allow all methods
-    allow_headers=["*"],  # allow all headers
+    allow_methods=["*"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
 )
 
 app.include_router(router)

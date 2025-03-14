@@ -3,7 +3,7 @@ import axios from "axios";
 const API_BASE_URL =
   import.meta.env.MODE === "production"
     ? "/api"
-    : import.meta.env.VITE_API_BASE_URL_DEV.replace(/\/$/, "");
+    : import.meta.env.VITE_API_BASE_URL_DEV;
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 

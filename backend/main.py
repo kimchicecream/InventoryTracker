@@ -10,10 +10,10 @@ app = FastAPI()
 
 # Set allowed origins dynamically
 ENV = os.getenv("ENV", "development")
-if ENV == "production":
-    ALLOWED_ORIGINS = [os.getenv("FRONTEND_URL", "https://invtrackr.onrender.com")]
-else:
+if ENV == "development":
     ALLOWED_ORIGINS = ["http://localhost:5173"]
+else:
+    ALLOWED_ORIGINS = [os.getenv("FRONTEND_URL", "http://localhost:5173")]
 
 # CORS middleware
 app.add_middleware(

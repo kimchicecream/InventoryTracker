@@ -1,4 +1,5 @@
 export const getUnavailableParts = (parts) => {
+    console.log("Parts received:", parts); // Debugging log
     return parts.filter(part => {
         const quantity = part.quantity || 0;
         const partsPerMachine = part.parts_per_machine || 0;

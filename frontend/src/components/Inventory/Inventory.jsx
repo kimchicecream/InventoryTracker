@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import { fetchParts, updatePart } from "../../api";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import { fetchParts, updatePart, deletePart } from "../../api";
 import { getUnavailableParts, capitalizeFirstLetter, getLowStockItems, getMachinesPossible, getTotalUniqueParts } from "../../utils/inventoryLogic";
 import './Inventory.css';
 
@@ -9,6 +10,8 @@ function Inventory() {
     const [parts, setParts] = useState([]);
     const [selectedParts, setSelectedParts] = useState([]);
     const [openDropdown, setOpenDropdown] = useState(null);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [partToDelete, setPartToDelete] = useState(null);
     const dropdownRefs = useRef(new Map());
 
     useEffect(() => {
@@ -47,9 +50,22 @@ function Inventory() {
         setOpenDropdown(null);
     };
 
-    const handleDelete = (id) => {
-        console.log(`Delete part: ${id}`);
-        setOpenDropdown(null);
+    const handleDelete = (part) => {
+        setPartToDelete(part);
+        setIsDeleteModalOpen(true);
+    };
+
+    const confirmDelete = async () => {
+        if (!partToDelete) return;
+
+        try {
+            await deletePart(partToDelete.id);
+            setParts((prevParts) => prevParts.filter((p) => p.id !== partToDelete.id));
+            setIsDeleteModalOpen(false);
+            setPartToDelete(null);
+        } catch (error) {
+            console.error("Error deleting part:", error);
+        }
     };
 
     useEffect(() => {
@@ -232,7 +248,7 @@ function Inventory() {
                                         >
                                             <button onClick={() => handleEdit(part.id)}>Edit</button>
                                             <span></span>
-                                            <button onClick={() => handleDelete(part.id)}>Delete</button>
+                                            <button onClick={() => handleDelete(part)}>Delete</button>
                                         </div>
                                     )}
                                 </div>
@@ -243,6 +259,12 @@ function Inventory() {
                 <div className='pagination'></div>
             </div>
             <AddItemModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onPartAdded={loadParts} />
+            <DeleteConfirmationModal
+                isOpen={isDeleteModalOpen}
+                onClose={() => setIsDeleteModalOpen(false)}
+                onConfirm={confirmDelete}
+                partName={partToDelete?.name}
+            />
         </div>
     );
 }

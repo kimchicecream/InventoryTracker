@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Header, File, UploadFile, Request
 from sqlalchemy.orm import Session
 from backend.database import get_db
-from models import Part
+from backend.models import Part
 from pydantic import BaseModel
 from typing import Optional
 import os

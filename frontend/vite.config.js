@@ -9,4 +9,10 @@ export default defineConfig({
     outDir: path.resolve(__dirname, '../backend/static'),
     emptyOutDir: true,
   },
+  server: {
+    port: 5173,
+  },
+  define: {
+    "process.env": process.env,
+  }
 });

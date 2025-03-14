@@ -1,16 +1,16 @@
 import axios from "axios";
 
-const API_URL =
-  import.meta.env.MODE === "development"
-    ? import.meta.env.VITE_API_BASE_URL_DEV
-    : import.meta.env.VITE_API_BASE_URL_PROD;
+const API_BASE_URL =
+  import.meta.env.MODE === "production"
+    ? "/api"  // ✅ Relative path in production
+    : import.meta.env.VITE_API_BASE_URL_DEV;
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 axios.defaults.withCredentials = true;
 
 // Default headers for all request
-axios.defaults.baseURL = API_URL;
+axios.defaults.baseURL = API_BASE_URL;
 axios.defaults.headers.common["x-api-key"] = API_KEY;
 
 // POST new image

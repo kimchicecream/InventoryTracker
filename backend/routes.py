@@ -25,7 +25,7 @@ class PartCreate(BaseModel):
     name: str
     quantity: int
     link: Optional[str] = None
-    type: Optional[str] = None
+    part_type: Optional[str] = None
     category: Optional[str] = None
     image: Optional[str] = None
     parts_per_machine: Optional[int] = None
@@ -35,7 +35,7 @@ class PartUpdate(BaseModel):
     name: Optional[str] = None
     quantity: Optional[int] = None
     link: Optional[str] = None
-    type: Optional[str] = None
+    part_type: Optional[str] = None
     category: Optional[str] = None
     image: Optional[str] = None
     parts_per_machine: Optional[int] = None

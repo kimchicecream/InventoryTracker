@@ -16,7 +16,7 @@ class Part(Base):
     link = Column(String, nullable=True)
     image = Column(String, nullable=True)
     category = Column(String, nullable=True)
-    type = Column(String, nullable=True)
+    part_type = Column(String, nullable=True)
     parts_per_machine = Column(Integer, nullable=True)
     status = Column(String, nullable=False, default="Unordered")
 

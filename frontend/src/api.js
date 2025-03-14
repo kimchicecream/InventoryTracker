@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL =
+  import.meta.env.MODE === "production"
+    ? import.meta.env.VITE_API_BASE_URL_PROD
+    : import.meta.env.VITE_API_BASE_URL_DEV;
+
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 axios.defaults.withCredentials = true;

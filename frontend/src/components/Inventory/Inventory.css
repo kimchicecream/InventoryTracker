@@ -94,12 +94,38 @@
     padding: 10px;
 }
 
+/* ----------------- */
+/* FILTERS CONTAINER */
+/* ----------------- */
 .inventory .big-box .filters-container {
     /* height: 100px; */
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    font-size: 15px;
+
+    margin-bottom: 10px;
+    padding: 0px 10px;
+    color: rgb(84, 84, 84);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.filters-container button {
+    all: unset;
+
+    border: 1px solid gray;
+    width: 15px;
+    height: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    border-radius: 4px;
+    font-size: 13px;
+}
 
 /* ------ */
 /* LABELS */

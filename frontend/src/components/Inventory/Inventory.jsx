@@ -187,7 +187,12 @@ function Inventory() {
                 </button>
             </div>
             <div className="big-box">
-                <div className="filters-container"></div>
+                <div className="filters-container">
+                    <div className="total-items-shown">
+                        Showing {parts.length} {parts.length === 1 ? "item" : "items"}
+                    </div>
+                    <button className="delete-selected"><i className="fa-solid fa-trash"></i></button>
+                </div>
                 <div className="labels-container">
                     <div className="label select-all">
                         <input

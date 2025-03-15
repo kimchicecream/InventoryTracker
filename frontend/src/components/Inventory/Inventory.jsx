@@ -12,6 +12,8 @@ function Inventory() {
     const [openDropdown, setOpenDropdown] = useState(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [partToDelete, setPartToDelete] = useState(null);
+    const [editingField, setEditingField] = useState(null);
+    const [editValue, setEditValue] = useState("");
     const dropdownRefs = useRef(new Map());
 
     useEffect(() => {
@@ -69,6 +71,38 @@ function Inventory() {
         }
     };
 
+    const handleEditClick = (partId, field, value) => {
+        setEditingField({ partId, field });
+        setEditValue(value);
+    };
+
+    const handleSaveEdit = async () => {
+        if (!editingField) return;
+
+        const { partId, field } = editingField;
+
+        try {
+            const updatedPart = await updatePart(partId, { [field]: editValue });
+
+            setParts((prevParts) =>
+                prevParts.map((p) =>
+                    p.id === partId ? { ...p, [field]: updatedPart[field] } : p
+                )
+            );
+        } catch (error) {
+            console.error("Error updating part:", error);
+        }
+
+        setEditingField(null);
+        setEditValue("");
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            handleSaveEdit();
+        }
+    };
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
@@ -105,7 +139,6 @@ function Inventory() {
         }
     };
 
-
     const getAvailabilityStatus = (part) => {
         if (part.quantity === 0) {
             return { label: "Out of Stock", className: "out-of-stock" };
@@ -120,6 +153,8 @@ function Inventory() {
     const lowStockCount = getLowStockItems(parts).length;
     const totalMachinesBuildable = getMachinesPossible(parts);
     const totalUniqueParts = getTotalUniqueParts(parts);
+    const categoryOptions = ["Writing", "Feeding", "Electronic", "Hardware"];
+    const typeOptions = ["OTS", "3D-print", "Laser cut"];
 
     return (
         <div className="inventory">
@@ -214,53 +249,144 @@ function Inventory() {
                     <div className="label availability">Availability</div>
                 </div>
                 <div className='part-container'>
-                    {parts.map((part) => {
-                        const { label, className } = getAvailabilityStatus(part);
+                {parts.map((part) => {
+                    const { label, className } = getAvailabilityStatus(part);
 
-                        return (
-                            <div
-                                key={part.id}
-                                className={`part-item ${selectedParts.includes(part.id) ? "selected" : ""}`}
-                            >
-                                <div className="part select-box">
-                                    <input
-                                        type="checkbox"
-                                        className="checkbox"
-                                        checked={selectedParts.includes(part.id)}
-                                        onChange={() => toggleSelect(part.id)}
-                                    />
-                                </div>
-                                <p className="part placeholder"></p>
-                                <p className="part name">{part.name}</p>
-                                <p className="part quantity">{part.quantity}</p>
-                                <p className="part ppm">{part.parts_per_machine}</p>
-                                <p className="part category">{capitalizeFirstLetter(part.category)}</p>
-                                <p className="part type">{capitalizeFirstLetter(part.part_type)}</p>
-                                <p className="part link">
-                                    {part.link && part.link.trim() !== "" ? (
-                                        <a href={part.link} target="_blank" rel="noopener noreferrer">
-                                            <i className="fa-solid fa-link"></i>
-                                        </a>
-                                    ) : null}
-                                </p>
-                                <p className={`part status ${part.status.toLowerCase()}`} onClick={() => toggleOrderStatus(part)}>{part.status}</p>
-                                <p className={`part availability ${className}`}>{label}</p>
-                                <div className="part options" onClick={(e) => handleEllipsisClick(part.id, e)}>
-                                    <i className="fa-solid fa-ellipsis"></i>
-                                    {openDropdown === part.id && (
-                                        <div
-                                            className="dropdown-menu"
-                                            ref={(el) => dropdownRefs.current.set(part.id, el)}
-                                        >
-                                            <button onClick={() => handleEdit(part.id)}>Edit</button>
-                                            <span></span>
-                                            <button onClick={() => handleDelete(part)}>Delete</button>
-                                        </div>
-                                    )}
-                                </div>
+                    return (
+                        <div
+                            key={part.id}
+                            className={`part-item ${selectedParts.includes(part.id) ? "selected" : ""}`}
+                        >
+                            <div className="part select-box">
+                                <input
+                                    type="checkbox"
+                                    className="checkbox"
+                                    checked={selectedParts.includes(part.id)}
+                                    onChange={() => toggleSelect(part.id)}
+                                />
                             </div>
-                        );
-                    })}
+                            <p className="part placeholder"></p>
+                            <p
+                                className="part name"
+                                onClick={() => handleEditClick(part.id, "name", part.name)}
+                            >
+                                {editingField?.partId === part.id && editingField?.field === "name" ? (
+                                    <input
+                                        type="text"
+                                        value={editValue}
+                                        onChange={(e) => setEditValue(e.target.value)}
+                                        onBlur={handleSaveEdit}
+                                        onKeyDown={handleKeyDown}
+                                        autoFocus
+                                    />
+                                ) : (
+                                    part.name
+                                )}
+                            </p>
+                            <p
+                                className="part quantity"
+                                onClick={() => handleEditClick(part.id, "quantity", part.quantity)}
+                            >
+                                {editingField?.partId === part.id && editingField?.field === "quantity" ? (
+                                    <input
+                                        type="number"
+                                        value={editValue}
+                                        onChange={(e) => setEditValue(e.target.value)}
+                                        onBlur={handleSaveEdit}
+                                        onKeyDown={handleKeyDown}
+                                        autoFocus
+                                    />
+                                ) : (
+                                    part.quantity
+                                )}
+                            </p>
+
+                            <p
+                                className="part ppm"
+                                onClick={() => handleEditClick(part.id, "parts_per_machine", part.parts_per_machine)}
+                            >
+                                {editingField?.partId === part.id && editingField?.field === "parts_per_machine" ? (
+                                    <input
+                                        type="number"
+                                        value={editValue}
+                                        onChange={(e) => setEditValue(e.target.value)}
+                                        onBlur={handleSaveEdit}
+                                        onKeyDown={handleKeyDown}
+                                        autoFocus
+                                    />
+                                ) : (
+                                    part.parts_per_machine
+                                )}
+                            </p>
+                            <p
+                                className="part category"
+                                onClick={() => handleEditClick(part.id, "category", part.category || "-")}
+                            >
+                                {editingField?.partId === part.id && editingField?.field === "category" ? (
+                                    <select
+                                        value={editValue}
+                                        onChange={(e) => setEditValue(e.target.value)}
+                                        onBlur={handleSaveEdit}
+                                        autoFocus
+                                    >
+                                        <option value="-" disabled>-</option>
+                                        {categoryOptions.map((option) => (
+                                            <option key={option} value={option}>
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </select>
+                                ) : (
+                                    part.category ? capitalizeFirstLetter(part.category) : <span className="empty-placeholder">-</span>
+                                )}
+                            </p>
+                            <p
+                                className="part type"
+                                onClick={() => handleEditClick(part.id, "part_type", part.part_type || "-")}
+                            >
+                                {editingField?.partId === part.id && editingField?.field === "part_type" ? (
+                                    <select
+                                        value={editValue}
+                                        onChange={(e) => setEditValue(e.target.value)}
+                                        onBlur={handleSaveEdit}
+                                        autoFocus
+                                    >
+                                        <option value="-" disabled>-</option>
+                                        {typeOptions.map((option) => (
+                                            <option key={option} value={option}>
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </select>
+                                ) : (
+                                    part.part_type ? capitalizeFirstLetter(part.part_type) : <span className="empty-placeholder">-</span>
+                                )}
+                            </p>
+                            <p className="part link">
+                                {part.link && part.link.trim() !== "" ? (
+                                    <a href={part.link} target="_blank" rel="noopener noreferrer">
+                                        <i className="fa-solid fa-link"></i>
+                                    </a>
+                                ) : null}
+                            </p>
+                            <p className={`part status ${part.status.toLowerCase()}`} onClick={() => toggleOrderStatus(part)}>{part.status}</p>
+                            <p className={`part availability ${className}`}>{label}</p>
+                            <div className="part options" onClick={(e) => handleEllipsisClick(part.id, e)}>
+                                <i className="fa-solid fa-ellipsis"></i>
+                                {openDropdown === part.id && (
+                                    <div
+                                        className="dropdown-menu"
+                                        ref={(el) => dropdownRefs.current.set(part.id, el)}
+                                    >
+                                        <button onClick={() => handleEdit(part.id)}>Edit</button>
+                                        <span></span>
+                                        <button onClick={() => handleDelete(part)}>Delete</button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    );
+                })}
                 </div>
                 <div className='pagination'></div>
             </div>

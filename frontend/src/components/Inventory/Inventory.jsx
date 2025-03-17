@@ -318,16 +318,12 @@ function Inventory() {
                                     part.parts_per_machine
                                 )}
                             </p>
-                            <p
-                                className="part category"
-                                onClick={() => handleEditClick(part.id, "category", part.category || "-")}
-                            >
-                                {editingField?.partId === part.id && editingField?.field === "category" ? (
+                            <p className="part category">
+                                <div className="custom-select">
                                     <select
-                                        value={editValue}
-                                        onChange={(e) => setEditValue(e.target.value)}
+                                        value={part.category || "-"}
+                                        onChange={(e) => handleEditClick(part.id, "category", e.target.value)}
                                         onBlur={handleSaveEdit}
-                                        autoFocus
                                     >
                                         <option value="-" disabled>-</option>
                                         {categoryOptions.map((option) => (
@@ -336,20 +332,17 @@ function Inventory() {
                                             </option>
                                         ))}
                                     </select>
-                                ) : (
-                                    part.category ? capitalizeFirstLetter(part.category) : <span className="empty-placeholder">-</span>
-                                )}
+                                    {/* <i className="fa-solid fa-caret-down"></i> */}
+                                </div>
                             </p>
-                            <p
-                                className="part type"
-                                onClick={() => handleEditClick(part.id, "part_type", part.part_type || "-")}
-                            >
-                                {editingField?.partId === part.id && editingField?.field === "part_type" ? (
+
+                            {/* Type Dropdown - Always Visible */}
+                            <p className="part type">
+                                <div className="custom-select">
                                     <select
-                                        value={editValue}
-                                        onChange={(e) => setEditValue(e.target.value)}
+                                        value={part.part_type || "-"}
+                                        onChange={(e) => handleEditClick(part.id, "part_type", e.target.value)}
                                         onBlur={handleSaveEdit}
-                                        autoFocus
                                     >
                                         <option value="-" disabled>-</option>
                                         {typeOptions.map((option) => (
@@ -358,9 +351,8 @@ function Inventory() {
                                             </option>
                                         ))}
                                     </select>
-                                ) : (
-                                    part.part_type ? capitalizeFirstLetter(part.part_type) : <span className="empty-placeholder">-</span>
-                                )}
+                                    {/* <i className="fa-solid fa-caret-down"></i> */}
+                                </div>
                             </p>
                             <p className="part link">
                                 {part.link && part.link.trim() !== "" ? (

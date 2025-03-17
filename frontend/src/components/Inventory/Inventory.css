@@ -185,49 +185,37 @@
     /* border: 1px solid red; */
 }
 
-.part {
-    padding-right: 20px;
-}
-
 .part input {
     all: unset;
-    /* text-decoration: underline; */
-    /* background-color: rgb(182, 182, 182); */
-    /* width: auto; */
-    /* min-width: 50px; */
     width: 100%;
-    /* text-align: center; */
-    /* padding: 2px; */
     font-size: 15px;
     border-bottom: 1px solid #a0a0a0;
 }
 
-.part select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    border: none;
-    outline: none;
+.custom-select {
+    display: flex;
+}
+
+.custom-select select {
     background-color: transparent;
-    padding: 0px 30px 0px 0px;
-    font-size: 15px;
+    border-radius: 5px;
+    padding: 1px 3px;
+    border: none;
+}
+
+.custom-select i {
+    color: black;
+}
+
+.custom-select select:hover {
+    background-color: rgba(0, 0, 0, 0.05);
     cursor: pointer;
-    position: relative;
 }
 
-.part select {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="black"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 8px center;
-    background-size: 17px;
-}
-
-.part select:focus {
-    /* outline: none; */
-    border: 1px solid black;
+.custom-select select:focus {
+    outline: none;
     box-shadow: none;
 }
-
 
 .inventory .part-container .part-item:hover {
     background-color: #ffffff;

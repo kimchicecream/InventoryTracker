@@ -71,9 +71,23 @@ function Inventory() {
         }
     };
 
+    // const handleEditClick = (partId, field, value) => {
+    //     setEditingField({ partId, field });
+    //     setEditValue(value);
+    // };
+
     const handleEditClick = (partId, field, value) => {
-        setEditingField({ partId, field });
-        setEditValue(value);
+        // Update state immediately for fast UI feedback
+        setParts((prevParts) =>
+            prevParts.map((p) =>
+                p.id === partId ? { ...p, [field]: value } : p
+            )
+        );
+
+        // Send update request in the background
+        updatePart(partId, { [field]: value }).catch((error) => {
+            console.error("Error updating part:", error);
+        });
     };
 
     const handleSaveEdit = async () => {
@@ -318,7 +332,7 @@ function Inventory() {
                                     part.parts_per_machine
                                 )}
                             </p>
-                            <p className="part category">
+                            <div className="part category">
                                 <div className="custom-select">
                                     <select
                                         value={part.category || "-"}
@@ -332,12 +346,9 @@ function Inventory() {
                                             </option>
                                         ))}
                                     </select>
-                                    {/* <i className="fa-solid fa-caret-down"></i> */}
                                 </div>
-                            </p>
-
-                            {/* Type Dropdown - Always Visible */}
-                            <p className="part type">
+                            </div>
+                            <div className="part type">
                                 <div className="custom-select">
                                     <select
                                         value={part.part_type || "-"}
@@ -351,9 +362,8 @@ function Inventory() {
                                             </option>
                                         ))}
                                     </select>
-                                    {/* <i className="fa-solid fa-caret-down"></i> */}
                                 </div>
-                            </p>
+                            </div>
                             <p className="part link">
                                 {part.link && part.link.trim() !== "" ? (
                                     <a href={part.link} target="_blank" rel="noopener noreferrer">

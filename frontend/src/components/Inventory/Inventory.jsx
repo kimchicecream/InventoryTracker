@@ -22,7 +22,7 @@ function Inventory() {
 
     const loadParts = async () => {
         const data = await fetchParts();
-        console.log("Parts received from API:", data);
+        // console.log("Parts received from API:", data);
         setParts(data);
     };
 
@@ -49,7 +49,7 @@ function Inventory() {
 
 
     const handleEdit = (id) => {
-        console.log(`Edit part: ${id}`);
+        // console.log(`Edit part: ${id}`);
         setOpenDropdown(null);
     };
 
@@ -72,21 +72,19 @@ function Inventory() {
     };
 
     // const handleEditClick = (partId, field, value) => {
-    //     setEditingField({ partId, field });
-    //     setEditValue(value);
     // };
 
     const handleEditClick = (partId, field, value) => {
-        // Update state immediately for fast UI feedback
         setParts((prevParts) =>
             prevParts.map((p) =>
                 p.id === partId ? { ...p, [field]: value } : p
             )
         );
-
-        // Send update request in the background
+        setEditingField({ partId, field });
+        setEditValue(value);
         updatePart(partId, { [field]: value }).catch((error) => {
             console.error("Error updating part:", error);
+
         });
     };
 
@@ -138,8 +136,8 @@ function Inventory() {
         const newStatus = part.status === "Unordered" ? "Ordered" : "Unordered";
 
         try {
-            console.log("Updating part ID:", part.id);
-            console.log("Sending status:", newStatus);
+            // console.log("Updating part ID:", part.id);
+            // console.log("Sending status:", newStatus);
 
             const updatedPart = await updatePart(part.id, { status: newStatus });
 
@@ -147,7 +145,7 @@ function Inventory() {
                 prevParts.map((p) => (p.id === part.id ? { ...p, status: updatedPart.status } : p))
             );
 
-            console.log("Update successful:", updatedPart);
+            // console.log("Update successful:", updatedPart);
         } catch (error) {
             console.error("Error updating order status:", error.response?.data || error.message);
         }

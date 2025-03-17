@@ -188,8 +188,8 @@
 .part input {
     all: unset;
     width: 100%;
-    font-size: 15px;
-    border-bottom: 1px solid #a0a0a0;
+    font-size: 16px;
+    /* border-bottom: 1px solid #a0a0a0; */
 }
 
 .custom-select {

@@ -223,7 +223,8 @@
 }
 
 .part select:focus {
-    outline: none;
+    /* outline: none; */
+    border: 1px solid black;
     box-shadow: none;
 }
 

@@ -14,6 +14,7 @@ function Inventory() {
     const [partToDelete, setPartToDelete] = useState(null);
     const [editingField, setEditingField] = useState(null);
     const [editValue, setEditValue] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
     const dropdownRefs = useRef(new Map());
 
     useEffect(() => {
@@ -171,6 +172,13 @@ function Inventory() {
     const categoryOptions = ["Writing", "Feeding", "Electronics", "Hardware"];
     const typeOptions = ["OTS", "3D-print", "Laser cut"];
 
+    const filteredParts = parts.filter((part) =>
+        part.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        part.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        part.part_type.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+
     return (
         <div className="inventory">
             <div className='header-container'><h1>Inventory</h1></div>
@@ -231,7 +239,13 @@ function Inventory() {
             <div className="search-add-container">
                 <div className="search-bar">
                     <div className="search-icon"><i className="fa-solid fa-magnifying-glass"></i></div>
-                    <input type="text" placeholder="Search inventory" className="search-input"/>
+                    <input
+                        type="text"
+                        placeholder="Search inventory"
+                        className="search-input"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                 </div>
                 <button className="add-item-button" onClick={() => setIsModalOpen(true) }>
                     <i className="fa-solid fa-plus"></i>Add Item
@@ -264,7 +278,7 @@ function Inventory() {
                     <div className="label availability">Availability</div>
                 </div>
                 <div className='part-container'>
-                {parts.map((part) => {
+                {filteredParts.map((part) => {
                     console.log(`Rendering part ID: ${part.id}, Name: ${part.name}, Category: ${part.category}`);
                     const { label, className } = getAvailabilityStatus(part);
 

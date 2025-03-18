@@ -168,7 +168,7 @@ function Inventory() {
     const lowStockCount = getLowStockItems(parts).length;
     const totalMachinesBuildable = getMachinesPossible(parts);
     const totalUniqueParts = getTotalUniqueParts(parts);
-    const categoryOptions = ["Writing", "Feeding", "Electronic", "Hardware"];
+    const categoryOptions = ["Writing", "Feeding", "Electronics", "Hardware"];
     const typeOptions = ["OTS", "3D-print", "Laser cut"];
 
     return (

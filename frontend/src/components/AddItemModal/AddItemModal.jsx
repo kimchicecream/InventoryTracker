@@ -88,7 +88,7 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
                         <option value="">Select a category</option>
                         <option value="writing">Writing</option>
                         <option value="feeding">Feeding</option>
-                        <option value="electronics">Electronic</option>
+                        <option value="electronics">Electronics</option>
                         <option value="hardware">Hardware</option>
                     </select>
 

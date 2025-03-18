@@ -65,15 +65,15 @@ async def add_part(part: PartCreate, db: Session = Depends(get_db)):
     new_part = Part(
         name=part.name,
         quantity=part.quantity,
-        category=category,
-        part_type=part_type,
+        category=part.category if part.category else "-",
+        part_type=part.part_type if part.part_type else "-",
         link=part.link,
         parts_per_machine=part.parts_per_machine,
         image=part.image,
         status=part.status
     )
 
-    new_part = Part(**part.dict(exclude_unset=True))
+    # new_part = Part(**part.dict(exclude_unset=True))
     db.add(new_part)
     db.commit()
     db.refresh(new_part)

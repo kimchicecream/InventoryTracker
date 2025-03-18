@@ -22,7 +22,7 @@ function Inventory() {
 
     const loadParts = async () => {
         const data = await fetchParts();
-        // console.log("Parts received from API:", data);
+        console.log("Parts received from API:", data);
         setParts(data);
     };
 
@@ -74,18 +74,21 @@ function Inventory() {
     // const handleEditClick = (partId, field, value) => {
     // };
 
-    const handleEditClick = (partId, field, value) => {
-        setParts((prevParts) =>
-            prevParts.map((p) =>
-                p.id === partId ? { ...p, [field]: value } : p
-            )
-        );
+    const handleEditClick = async (partId, field, value) => {
         setEditingField({ partId, field });
         setEditValue(value);
-        updatePart(partId, { [field]: value }).catch((error) => {
-            console.error("Error updating part:", error);
 
-        });
+        try {
+            const updatedPart = await updatePart(partId, { [field]: value });
+
+            setParts((prevParts) =>
+                prevParts.map((p) =>
+                    p.id === partId ? { ...p, [field]: updatedPart[field] ?? "-" } : p
+                )
+            );
+        } catch (error) {
+            console.error("Error updating part:", error);
+        }
     };
 
     const handleSaveEdit = async () => {
@@ -262,6 +265,7 @@ function Inventory() {
                 </div>
                 <div className='part-container'>
                 {parts.map((part) => {
+                    console.log(`Rendering part ID: ${part.id}, Name: ${part.name}, Category: ${part.category}`);
                     const { label, className } = getAvailabilityStatus(part);
 
                     return (
@@ -333,7 +337,7 @@ function Inventory() {
                             <div className="part category">
                                 <div className="custom-select">
                                     <select
-                                        value={part.category || "-"}
+                                        value={capitalizeFirstLetter(part.category) || "-"}
                                         onChange={(e) => handleEditClick(part.id, "category", e.target.value)}
                                         onBlur={handleSaveEdit}
                                     >

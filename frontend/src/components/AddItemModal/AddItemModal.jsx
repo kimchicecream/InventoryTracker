@@ -57,8 +57,8 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
         const newPart = {
             name: formData.name,
             quantity: parseInt(formData.quantity, 10),
-            category: formData.category,
-            part_type: formData.type,
+            category: formData.category || "-",
+            part_type: formData.part_type || "-",
             link: formData.link,
             parts_per_machine: parseInt(formData.parts_per_machine, 10),
             image: imageUrl,
@@ -93,7 +93,7 @@ function AddItemModal({ isOpen, onClose, onPartAdded }) {
                     </select>
 
                     <label>Type</label>
-                    <select name="type" value={formData.type} onChange={handleChange}>
+                    <select name="part_type" value={formData.part_type} onChange={handleChange}>
                         <option value="">Select a type</option>
                         <option value="OTS">OTS</option>
                         <option value="3D-print">3D Print</option>

@@ -201,6 +201,8 @@
     border-radius: 5px;
     padding: 1px 3px;
     border: none;
+
+    transition: 0.3s ease;
 }
 
 .custom-select i {

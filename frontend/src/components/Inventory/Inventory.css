@@ -419,6 +419,9 @@
     cursor: pointer;
 }
 
+/* ------- */
+/* TOOLTIP */
+/* ------- */
 .tooltip {
     position: absolute;
     top: 20px;
@@ -442,6 +445,15 @@
     transition: opacity 0.2s ease-in-out;
 }
 
+.tooltip-container:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+/* ------- */
+
+/* ------------ */
+/* LINK TOOLTIP */
+/* ------------ */
 .link-tooltip {
     position: absolute;
     bottom: 25px;
@@ -470,11 +482,7 @@
     opacity: 1;
     visibility: visible;
 }
-
-.tooltip-container:hover .tooltip {
-    opacity: 1;
-    visibility: visible;
-}
+/* ------------ */
 
 .part.availability {
     font-weight: bold;

@@ -431,7 +431,8 @@
     padding: 6px 10px;
     border-radius: 6px;
 
-    width: 160px;
+    width: 200px;
+    /* flex: 1; */
     text-align: center;
     white-space: normal;
     word-wrap: break-word;
@@ -439,6 +440,35 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease-in-out;
+}
+
+.link-tooltip {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.262);
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    padding: 12px 15px;
+    border-radius: 6px;
+
+    /* max-width: 200px; */
+    flex: 1;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.tooltip-container:hover .link-tooltip {
+    opacity: 1;
+    visibility: visible;
 }
 
 .tooltip-container:hover .tooltip {

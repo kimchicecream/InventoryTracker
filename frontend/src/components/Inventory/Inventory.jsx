@@ -21,6 +21,8 @@ function Inventory() {
         loadParts();
     }, []);
 
+    // const handle
+
     const loadParts = async () => {
         const data = await fetchParts();
         console.log("Parts received from API:", data);
@@ -383,7 +385,10 @@ function Inventory() {
                             <p className="part link">
                                 {part.link && part.link.trim() !== "" ? (
                                     <a href={part.link} target="_blank" rel="noopener noreferrer">
-                                        <i className="fa-solid fa-link"></i>
+                                        <div className="tooltip-container">
+                                            <i className="fa-solid fa-link"></i>
+                                            <div className="link-tooltip">{part.link}</div>
+                                        </div>
                                     </a>
                                 ) : null}
                             </p>

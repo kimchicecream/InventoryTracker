@@ -1,0 +1,5 @@
+.dashboard-container {
+    border: 1px solid red;
+    height: 100%;
+    padding: 20px 80px 200px 80px;
+}

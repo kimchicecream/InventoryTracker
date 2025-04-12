@@ -27,7 +27,7 @@ app.add_middleware(
 app.include_router(router, prefix="/api")
 
 if ENV == "production":
-    app.mount("/", StaticFiles(directory="backend/static/assets", html=True), name="static")
+    app.mount("/", StaticFiles(directory="backend/static", html=True), name="static")
 
     @app.get("/{full_path:path}")
     async def serve_react_app(full_path: str):

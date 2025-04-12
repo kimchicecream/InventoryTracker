@@ -1,15 +1,20 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Navigation.css";
 
-function Navigation({ setActivePage }) {
+function Navigation() {
     const [isExpanded, setIsExpanded] = useState(true);
-    const [activeButton, setActiveButton] = useState("dashboard");
     const timeoutRef = useRef(null);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    // Derive active button from URL
+    const currentPath = location.pathname.replace("/", "") || "dashboard";
 
     const startMinimizeTimer = () => {
         timeoutRef.current = setTimeout(() => {
             setIsExpanded(false);
-        }, 3000); // 3 seconds before collpasing
+        }, 3000); // 3 seconds before collapsing
     };
 
     const cancelMinimize = () => {
@@ -20,8 +25,7 @@ function Navigation({ setActivePage }) {
     };
 
     const handleNavigation = (page) => {
-        setActivePage(page);
-        setActiveButton(page);
+        navigate(`/${page}`);
     };
 
     return (
@@ -31,19 +35,19 @@ function Navigation({ setActivePage }) {
             onMouseLeave={startMinimizeTimer}
         >
             <button
-                className={`dashboard ${activeButton === "dashboard" ? "selected" : ""}`}
+                className={`dashboard ${currentPath === "dashboard" ? "selected" : ""}`}
                 onClick={() => handleNavigation("dashboard")}
             >
                 <i className="fa-solid fa-gauge"></i>
             </button>
             <button
-                className={`inventory ${activeButton === "inventory" ? "selected" : ""}`}
+                className={`inventory ${currentPath === "inventory" ? "selected" : ""}`}
                 onClick={() => handleNavigation("inventory")}
             >
                 <i className="fa-solid fa-warehouse"></i>
             </button>
             <button
-                className={`settings ${activeButton === "settings" ? "selected" : ""}`}
+                className={`settings ${currentPath === "settings" ? "selected" : ""}`}
                 onClick={() => handleNavigation("settings")}
             >
                 <i className="fa-solid fa-gear"></i>

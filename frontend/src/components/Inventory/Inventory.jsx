@@ -180,10 +180,9 @@ function Inventory() {
         part.part_type.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-
     return (
         <div className="inventory">
-            <div className='header-container'><h1>Inventory</h1></div>
+            {/* <div className='header-container'><h1>Inventory</h1></div>/ */}
             <div className='data-cards-container'>
                 <div className="data-card" id='one'>
                     <div className="title-number">

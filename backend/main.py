@@ -2,6 +2,8 @@ import os
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.requests import Request
 from backend.routes import router
 from dotenv import load_dotenv
 
@@ -26,3 +28,10 @@ app.include_router(router, prefix="/api")
 
 if ENV == "production":
     app.mount("/", StaticFiles(directory="backend/static", html=True), name="static")
+
+@app.get("/{full_path:path}")
+async def serve_react_app(full_path: str, request: Request):
+    index_path = os.path.join("backend/static", "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return {"detail": "Not Found"}

@@ -8,7 +8,7 @@ ENV = os.getenv("ENV", "development")
 if ENV == "production":
     # Use the persistent disk path in production
     db_path = "/data/app.db"
-    os.makedirs(os.path.dirname(db_path), exist_ok=True)
+    # os.makedirs(os.path.dirname(db_path), exist_ok=True)
     DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{db_path}")
 else:
     # Use the local SQLite file in development

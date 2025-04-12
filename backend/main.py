@@ -30,7 +30,7 @@ if ENV == "production":
     app.mount("/", StaticFiles(directory="backend/static", html=True), name="static")
 
 @app.get("/{full_path:path}")
-async def serve_react_app(full_path: str, request: Request):
+async def serve_react_app(full_path: str):
     index_path = os.path.join("backend/static", "index.html")
     if os.path.exists(index_path):
         return FileResponse(index_path)

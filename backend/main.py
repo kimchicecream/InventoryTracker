@@ -27,8 +27,10 @@ app.add_middleware(
 app.include_router(router, prefix="/api")
 
 if ENV == "production":
-    app.mount("/static", StaticFiles(directory="backend/static/assets"), name="static")
+    app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 
     @app.get("/{full_path:path}")
-    async def serve_react_app(full_path: str):
+    async def serve_spa(full_path: str):
+        if full_path.startswith("api/"):
+            return {"detail": "Not Found"}
         return FileResponse("backend/static/index.html")

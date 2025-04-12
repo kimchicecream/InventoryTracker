@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: path.resolve(__dirname, '../backend/static'),
+    assetsDir: "assets",
     emptyOutDir: true,
   },
   server: {

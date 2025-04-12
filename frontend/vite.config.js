@@ -4,7 +4,7 @@ import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/static/',
   plugins: [react()],
   build: {
     outDir: path.resolve(__dirname, '../backend/static'),

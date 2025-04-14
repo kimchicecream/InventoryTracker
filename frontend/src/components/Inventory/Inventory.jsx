@@ -182,7 +182,7 @@ function Inventory() {
 
     return (
         <div className="inventory">
-            {/* <div className='header-container'><h1>Inventory</h1></div>/ */}
+            {/* <div className='header-container'><h1>Inventory</h1></div> */}
             <div className='data-cards-container'>
                 <div className="data-card" id='one'>
                     <div className="title-number">
@@ -296,8 +296,8 @@ function Inventory() {
                                     onChange={() => toggleSelect(part.id)}
                                 />
                             </div>
-                            <p className="part placeholder"></p>
-                            <p
+                            <div className="part placeholder"></div>
+                            <div
                                 className="part name"
                                 onClick={() => handleEditClick(part.id, "name", part.name)}
                             >
@@ -313,8 +313,8 @@ function Inventory() {
                                 ) : (
                                     part.name
                                 )}
-                            </p>
-                            <p
+                            </div>
+                            <div
                                 className="part quantity"
                                 onClick={() => handleEditClick(part.id, "quantity", part.quantity)}
                             >
@@ -330,9 +330,8 @@ function Inventory() {
                                 ) : (
                                     part.quantity
                                 )}
-                            </p>
-
-                            <p
+                            </div>
+                            <div
                                 className="part ppm"
                                 onClick={() => handleEditClick(part.id, "parts_per_machine", part.parts_per_machine)}
                             >
@@ -348,7 +347,7 @@ function Inventory() {
                                 ) : (
                                     part.parts_per_machine
                                 )}
-                            </p>
+                            </div>
                             <div className="part category">
                                 <div className="custom-select">
                                     <select
@@ -381,7 +380,7 @@ function Inventory() {
                                     </select>
                                 </div>
                             </div>
-                            <p className="part link">
+                            <div className="part link">
                                 {part.link && part.link.trim() !== "" ? (
                                     <a href={part.link} target="_blank" rel="noopener noreferrer">
                                         <div className="tooltip-container">
@@ -390,9 +389,9 @@ function Inventory() {
                                         </div>
                                     </a>
                                 ) : null}
-                            </p>
-                            <p className={`part status ${part.status.toLowerCase()}`} onClick={() => toggleOrderStatus(part)}>{part.status}</p>
-                            <p className={`part availability ${className}`}>{label}</p>
+                            </div>
+                            <div className={`part status ${part.status.toLowerCase()}`} onClick={() => toggleOrderStatus(part)}>{part.status}</div>
+                            <div className={`part availability ${className}`}>{label}</div>
                             <div className="part options" onClick={(e) => handleEllipsisClick(part.id, e)}>
                                 <i className="fa-solid fa-ellipsis"></i>
                                 {openDropdown === part.id && (

@@ -1,17 +1,25 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard";
 import Inventory from "../Inventory/Inventory";
 import Settings from "../Settings/Settings";
 import './Homepage.css';
 
 function Homepage({ parts }) {
+    const location = useLocation();
+    const currentPath = location.pathname.replace("/", "") || "dashboard";
+
     return (
-        <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" />} />
-            <Route path="/dashboard" element={<Dashboard parts={parts} />} />
-            <Route path="/inventory" element={<Inventory parts={parts} />} />
-            <Route path="/settings" element={<Settings />} />
-        </Routes>
+        <>
+            <div style={{ display: currentPath === "dashboard" ? "block" : "none" }}>
+                <Dashboard parts={parts} />
+            </div>
+            <div style={{ display: currentPath === "inventory" ? "block" : "none" }}>
+                <Inventory parts={parts} />
+            </div>
+            <div style={{ display: currentPath === "settings" ? "block" : "none" }}>
+                <Settings />
+            </div>
+        </>
     );
 }
 

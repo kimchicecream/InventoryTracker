@@ -1,5 +1,44 @@
 .dashboard-container {
     border: 1px solid red;
-    height: 100%;
-    padding: 20px 80px 200px 80px;
+    padding: 20px 80px 20px 80px;
 }
+
+.progress-bar {
+    /* border: 1px solid blue; */
+    height: 60px;
+    background-color: black;
+    border-radius: 16px;
+
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+}
+
+.progress-bar .time-date {
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.progress-bar .time-date .time {
+    font-weight: bold;
+
+    /* display: flex; */
+    /* gap: 10px; */
+}
+
+.progress-bar .time-date .time .time-large {
+    font-size: 20px;
+}
+
+.ampm {
+    font-weight: normal;
+}
+
+.weekday {
+    font-weight: 700; /* bold */
+    font-size: 20px;;
+    /* margin-right: 0.3rem; */
+  }

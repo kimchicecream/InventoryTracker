@@ -30,7 +30,7 @@ function Dashboard() {
         return () => clearInterval(interval);
       }, []);
 
-    return(
+    return (
         <div className="dashboard-container">
             <div className='progress-bar'>
                 <div className='time-date'>
@@ -44,13 +44,23 @@ function Dashboard() {
                     </div>
                 </div>
             </div>
-            <div className='row one'>
-                <div className='box one' id='machine-counter'>
-                    <div className='label'>Total machines out</div>
-                    <div className='total'></div>
-                    <div className='buttons'></div>
+            <div className="bento-grid">
+                <div className="col-left">
+                    <div className="row row-1">
+                        <div className="col col-1" id="tile total-machines"></div>
+                        <div className="col col-2" id="tile items"></div>
+                    </div>
+                    <div className="row row-2">
+                        <div className="col col-1" id="tile low-stock"></div>
+                        <div className="col col-2" id="tile unavailable-items"></div>
+                        <div className="col col-3" id="tile total-possible"></div>
+                    </div>
+                    <div className="row row-3">
+                        {/* <div className="subrow subrow-3"></div>
+                        <div className="subrow subrow-4"></div> */}
+                    </div>
                 </div>
-
+                <div className="col-right"></div>
             </div>
         </div>
     );

@@ -17,6 +17,8 @@ function Inventory() {
     const [searchQuery, setSearchQuery] = useState("");
     const dropdownRefs = useRef(new Map());
 
+    const [activeCategory, setActiveCategory] = useState("All");
+
     useEffect(() => {
         loadParts();
     }, []);
@@ -174,11 +176,18 @@ function Inventory() {
     const categoryOptions = ["Writing", "Feeding", "Electronics", "Hardware"];
     const typeOptions = ["OTS", "3D-print", "Laser cut"];
 
-    const filteredParts = parts.filter((part) =>
-        part.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        part.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        part.part_type.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const filteredParts = parts.filter((part) => {
+        const matchesSearch =
+          part.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          part.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          part.part_type.toLowerCase().includes(searchQuery.toLowerCase());
+
+        const matchesCategory =
+          activeCategory === "All" || part.category === activeCategory;
+
+        return matchesSearch && matchesCategory;
+      });
+
 
     return (
         <div className="inventory">
@@ -247,6 +256,17 @@ function Inventory() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
+                </div>
+                <div className="filter-buttons">
+                    {["All", "Writing", "Feeding", "Electronics", "Hardware"].map((category) => (
+                    <button
+                        key={category}
+                        className={`filter-button ${activeCategory === category ? "active" : ""}`}
+                        onClick={() => setActiveCategory(category)}
+                    >
+                        {category}
+                    </button>
+                    ))}
                 </div>
                 <button className="add-item-button" onClick={() => setIsModalOpen(true) }>
                     <i className="fa-solid fa-plus"></i>Add Item

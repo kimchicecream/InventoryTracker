@@ -21,4 +21,5 @@ html {
     --dark-mode-bg: black;
     --light-mode-bg: white;
     --button-radius: 10px;
+    --tile-bg: rgb(245, 245, 245);
 }

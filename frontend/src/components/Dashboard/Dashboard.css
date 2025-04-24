@@ -63,7 +63,7 @@
 }
 
 .bento-grid .col-left .row-1 {
-    flex: 1.5;
+    flex: 2;
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -71,20 +71,25 @@
 
 .bento-grid .col-left .row-1 .col-1 {
     flex: 2;
-    background-color: rgb(255, 127, 23);
+    background-color: black;
     border-radius: 20px;
     /* border: 1px solid red; */
 }
 
 .bento-grid .col-left .row-1 .col-2 {
     flex: 3;
-    background-color: rgb(245, 245, 245);
+    background-color: var(--tile-bg);
     border-radius: 20px;
-    /* border: 1px solid red; */
+
+    padding: 15px;
+}
+
+.bento-grid .col-left .row-1 .col-2 .items-header {
+    font-weight: bold;
 }
 
 .bento-grid .col-left .row-2 {
-    flex: 2;
+    flex: 1.5;
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -92,25 +97,30 @@
 
 .bento-grid .col-left .row-2 .col-1 {
     flex: 1;
-    border: 1px solid red;
+    background-color: var(--tile-bg);
+    border-radius: 20px;
 }
 
 .bento-grid .col-left .row-2 .col-2 {
     flex: 1;
-    border: 1px solid red;
+    background-color: var(--tile-bg);
+    border-radius: 20px;
 }
 
 .bento-grid .col-left .row-2 .col-3 {
     flex: 1;
-    border: 1px solid red;
+    background-color: var(--tile-bg);
+    border-radius: 20px;
 }
 
 .bento-grid .col-left .row-3 {
     flex: 2;
-    border: 1px solid red;
+    background-color: var(--tile-bg);
+    border-radius: 20px;
 }
 
 .bento-grid .col-right {
     flex: 1;
-    border: 1px solid red;
+    background-color: var(--tile-bg);
+    border-radius: 20px;
 }

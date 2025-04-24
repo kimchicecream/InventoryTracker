@@ -4,6 +4,7 @@ import './Dashboard.css';
 function Dashboard() {
     const [timeParts, setTimeParts] = useState({ time: "", ampm: "" });
     const [dateParts, setDateParts] = useState({ day: "", date: "" });
+    const [machineCount, setMachineCount] = useState(0);
 
     useEffect(() => {
         const updateTime = () => {
@@ -47,8 +48,22 @@ function Dashboard() {
             <div className="bento-grid">
                 <div className="col-left">
                     <div className="row row-1">
-                        <div className="col col-1" id="tile total-machines"></div>
-                        <div className="col col-2" id="tile items"></div>
+                        <div className="col col-1" id="tile total-machines">
+                            <div className="machines-header">Total Machines Out</div>
+                            <div className="machines-counter"></div>
+                            <div className="machines-buttons">
+                                <button className="subtract-machine"></button>
+                                <button className="add-machine"></button>
+                            </div>
+                        </div>
+                        <div className="col col-2" id="tile items">
+                            <div className="items-header">Total Items</div>
+                            <div className="items-container">
+                                <div className="item ots"></div>
+                                <div className="item 3d"></div>
+                                <div className="item laser"></div>
+                            </div>
+                        </div>
                     </div>
                     <div className="row row-2">
                         <div className="col col-1" id="tile low-stock"></div>

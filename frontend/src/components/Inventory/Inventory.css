@@ -33,6 +33,26 @@
     transition: all 0.2s ease-in-out;
 }
 
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .filter-button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .filter-button.active {
+    background-color: #111827;
+    color: white;
+  }
+
 .search-bar:hover {
     border-color: var(--owrynge);
 }

@@ -183,7 +183,9 @@ function Inventory() {
           part.part_type.toLowerCase().includes(searchQuery.toLowerCase());
 
         const matchesCategory =
-          activeCategory === "All" || part.category === activeCategory;
+            activeCategory === "All" ||
+            part.category.toLowerCase() === activeCategory.toLowerCase();
+
 
         return matchesSearch && matchesCategory;
       });
